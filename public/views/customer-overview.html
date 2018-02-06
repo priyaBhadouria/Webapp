@@ -1,0 +1,150 @@
+<input type="text" ng-model="overview" ng-focus="hideShowFun1()" id="testing2" style="opacity:0;height:0px;">
+<div id="customertop" ng-hide = "customertop">
+<div id="custaggregationtop" ng-hide="custaggregationtop">
+	 <div class="layout layout--right style-scope rmd-ref-app-summary-card">
+			
+				<div class="layout__item u-1/6 summary-box style-scope rmd-ref-app-summary-card" style="width: 23% !important;">
+					<h4 class="summary-label caps style-scope rmd-ref-app-summary-card" style="font-size:16px;">Total Customer Sites</h4>
+					<div class="style-scope rmd-ref-app-summary-card">
+						<span class="summary-value style-scope rmd-ref-app-summary-card">{{headerData7.totalSitesInstalled}}</span>
+						<span class="summary-uom style-scope rmd-ref-app-summary-card">Sites</span>
+					</div>
+				</div>
+			
+				<div class="layout__item u-1/6 summary-box style-scope rmd-ref-app-summary-card" style="width: 23% !important;">
+					<h4 class="summary-label caps style-scope rmd-ref-app-summary-card" style="font-size:16px;">Customer Consumption</h4>
+					<div class="style-scope rmd-ref-app-summary-card">
+						<span class="summary-value style-scope rmd-ref-app-summary-card">{{headerData7.assetsInstalled}}</span>
+						<span class="summary-uom style-scope rmd-ref-app-summary-card">Units</span>
+					</div>
+				</div>
+			
+				<div class="layout__item u-1/6 summary-box style-scope rmd-ref-app-summary-card" style="width: 23% !important;">
+					<h4 class="summary-label caps style-scope rmd-ref-app-summary-card" style="font-size:16px;">Customer Returned</h4>
+					<div class="style-scope rmd-ref-app-summary-card">
+						<span class="summary-value style-scope rmd-ref-app-summary-card">{{headerData7.assetReturned}}</span>
+						<span class="summary-uom style-scope rmd-ref-app-summary-card">Units</span>
+					</div>
+				</div>												
+		  </div>
+		  </div>
+<div id="custaggregationdrill" ng-hide="custaggregationdrill">
+<h3 class="summary-label caps style-scope rmd-ref-app-summary-card" style="font-size:24px;">{{custName}}-{{customerDescription.customerDesc}}</h3>
+<div class="layout layout--right style-scope rmd-ref-app-summary-card">
+			
+				<div class="layout__item u-1/6 summary-box style-scope rmd-ref-app-summary-card" style="width: 23% !important;">
+					<h4 class="summary-label caps style-scope rmd-ref-app-summary-card" style="font-size:16px;">Installed</h4>
+					<div class="style-scope rmd-ref-app-summary-card">
+						<span class="summary-value style-scope rmd-ref-app-summary-card">{{headerDataPerCustomer7.installed}}</span>
+						<span class="summary-uom style-scope rmd-ref-app-summary-card">Units</span>
+					</div>
+				</div>	
+							
+				<div class="layout__item u-1/6 summary-box style-scope rmd-ref-app-summary-card" style="width: 23% !important;">
+					<h4 class="summary-label caps style-scope rmd-ref-app-summary-card" style="font-size:16px;">Return</h4>
+					<div class="style-scope rmd-ref-app-summary-card">
+						<span class="summary-value style-scope rmd-ref-app-summary-card">0</span>
+						<span class="summary-uom style-scope rmd-ref-app-summary-card">Units</span>
+					</div>
+				</div>
+				
+				<div class="layout__item u-1/6 summary-box style-scope rmd-ref-app-summary-card" style="width: 23% !important;">
+					<h4 class="summary-label caps style-scope rmd-ref-app-summary-card" style="font-size:16px;">FSG Served</h4>
+					<div class="style-scope rmd-ref-app-summary-card">
+						<span class="summary-value style-scope rmd-ref-app-summary-card">{{headerDataPerCustomer7.fsgServedLocation}}</span>
+						<span class="summary-uom style-scope rmd-ref-app-summary-card">Location</span>
+					</div>
+				</div>
+						
+			
+		  </div>
+</div>		  
+		  <px-card icon="fa-bar-chart" header-text="Customer Consumption Overview">
+		   <highchart id="chart11" config="chartConfig11" class="span12"></highchart>
+		   </px-card>
+		   </div>
+		
+	
+	  <div id="customer-location" ng-hide="customerlocation">
+ 
+       <button class="btn btn--tertiary btn--icon float--right" style="margin-top:10px; margin-right:10px;" type="button" 
+title="Back to Summary" ng-click="summaryCall2()"><i class="fa fa-times-circle"></i></button>
+
+	   <px-card header-text="Customer Consumption Detailed Data table">
+	   
+	  <a href="export"><img class="float--right" style="margin-top:-70px; margin-right:30px;" src="../images/excel.png" alt="Excel Download" title="Export to Excel"></a>
+	  <px-data-table id="custTable" table-data="{{projectDetails7}}" filterable striped>
+	  <!-- [{"material":"204114","materialDescription":"JPMC SB-100-12-2BLCK HVL","currentQty":-2,"lastDate":1479513600000,"customerSite":"Chase-JPMC 513509"}]-->
+	
+	<px-data-table-column
+          name="customerSite" type="html"
+		  label="Customer Site"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		
+	<px-data-table-column
+          name="customerDesc" type="html"
+		  label="Customer Description"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+    </px-data-table-column>
+	<px-data-table-column
+          name="material" type="html"
+		  label="Material"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+	<px-data-table-column
+          name="materialDescription" type="html"
+		  label="Material Description"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="currentQty" type="html"
+		  label="Installed Quantity"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="lastDate" type="html"
+		  label="Date of Installation"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>		
+      	<px-data-table-column
+          name="state" type="html"
+		  label="State"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="returnedQty" type="html"
+		  label="Returned"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="fsgServedLocation" type="html"
+		  label="FSG Served"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>		
+      </px-data-table>
+	  </px-card>
+	  </div>
+<script>
+ function drilldown(evt){			
+			$('#testing2').focus();            	 	
+          }
+</script>

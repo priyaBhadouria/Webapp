@@ -1,0 +1,623 @@
+
+	   <script type="application/javascript" src="../bower_components/orgchart/jquery-1.11.3.min.js"></script>
+	  <script type="application/javascript" src="../bower_components/orgchart/orgchart.js"></script> 		
+			
+		 <link href="../stylesheet/jquerysctipttop.css" rel="stylesheet" type="text/css">		
+		<link href="../stylesheet/orgchart.css" rel="stylesheet" type="text/css"> 
+		
+        <style>
+		div.demo1 {   
+    position: relative;
+    width: 100%;
+    min-height: 400px;
+    max-height: 700px;
+    overflow: auto;
+	overflow: scroll;
+    overflow-x: visible;
+	margin-top: -20px;
+    background-color: white;
+    overflow-y: hidden;
+  }
+		  .sample-container {
+                width: 250px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .sample-container-left {
+                width: 250px;
+            }
+            .sample-container-right {
+                width: 250px;
+                float: right;
+            }
+            .hover-tooltip {
+               
+                width: 100px;
+                
+            }
+            .test-el {
+                padding:10px;
+                text-align: center;
+                vertical-align: middle;
+                background-color: gray;
+            }
+        
+		#root{background-color:#33adff;} 
+		#fsg{background-color:yellow;}
+		#customer{background-color:#33cc33;}
+		.content{padding-top:23px;}
+		.jOrgChart .node {
+	 width: 100px;
+    border:solid 1px #8085e9;
+    -moz-border-radius: 17px;
+    -webkit-border-radius: 17px;
+    border-radius: 17px;
+	}
+	.jOrgChart .multi-tree span .content { border:solid 1px #8085e9;
+    -moz-border-radius: 17px;
+    -webkit-border-radius: 17px;
+    border-radius: 17px;
+padding-top:15px;	}
+        </style>	
+	
+	
+	
+<div ng-hide="!validUser">
+
+<px-card header-text="Select Plant">
+<form id="myForm">
+<label class="label--inline">Plant List:</label>
+<!-- <input id="customer" class="text-input" ng-change="changeFunction()" ng-model="myModel" placeholder="Enter Site ID" style="width:200px;" required/> -->
+ <select id="plants" class="u-mr+ u-ml+" ng-change="changeFunction()" ng-model="myModel">
+				<option value="">Select</option>
+				<!--<option value="1PS1">1PS1</option>
+                 <option value="1PS2">1PS2</option>
+                <option value="1MVH1">1MVH1</option>
+                <option value="1MVH2">1MVH2</option>
+				<option value="1WDR">1WDR</option> -->
+              </select>			  
+			  <button id="booxx" class="btn btn--primary btn--disabled" disabled="" type="submit" ng-click="submitForm()">Submit</button>
+			</form>
+			 
+			<!-- <div class="sample-container">
+            <div id="hoverDivTop" class="hover-tooltip">Hover for tooltip<br/><span>(top, 5 sec delay)</span></div>
+            <px-tooltip
+                for="hoverDivTop"
+                orientation="top"
+                delay="1000"
+                tooltip-message="Top tooltip">
+            </px-tooltip>
+            <p></p>
+            <div id="hoverDivBottom" class="hover-tooltip">Hover for tooltip<br/><span>(HTML element, bottom, default delay: 1 sec)</span></div>
+            <px-tooltip for="hoverDivBottom" orientation="bottom">
+                Bottom tooltip<br>with html<br><div class='test-el'>HTML Div</div>
+            </px-tooltip>
+            <p></p>
+            <div id="hoverDivLeft" class="hover-tooltip">Hover for tooltip<br/><span>(left, delay: 3 sec)</span></div>
+            <px-tooltip
+                for="hoverDivLeft"
+                delay="1000"
+                orientation="left"
+                tooltip-message="Left tooltip">
+            </px-tooltip>
+            <p></p>
+            <div id="hoverDivRight" class="hover-tooltip">Hover for tooltip<br/><span>(right, default delay: 1 sec)</span></div>
+            <px-tooltip
+                for="hoverDivRight"
+                orientation="right"
+                tooltip-message="Right tooltip">
+            </px-tooltip>
+        </div> -->
+
+			
+</px-card>
+ <!-- <template is="dom-bind">
+	  <iron-ajax url="../bower_components/px-data-table/dashboard.json" last-response="{{dashboarddata}}" auto></iron-ajax>     
+ -->	  <iron-ajax url="../bower_components/px-data-table/installation.json" last-response="{{instalationdata}}" auto></iron-ajax> 
+        <px-modal id="four" modal-heading="">              
+	   <px-card header-text="">
+	   <div class="container-tabs">
+		<label id="tab1" class="label--inline tab selected" for="basic-form-checkbox" ng-click="tabview()">
+		Plant {{plantName}} Overview</label>
+		<label id="tab2" class="label--inline tab" for="basic-form-checkbox1" ng-click="tabview1()">Plant {{plantName}} DETAILED DATA</label>
+		
+		</div>
+	   
+	   <button class="btn btn--tertiary btn--icon float--right" style="margin-top:-39px;" 
+title="Back to Summary" onclick="editcancelForm()"><i class="fa fa-times-circle"></i></button>
+	  <img class="float--right" style="margin-top:-57px; margin-right:54px;" src="../images/excel.png" id="inventoryImageId14" alt="Excel Download" title="Export to Excel">
+	  <div id="drilldata" ng-hide="drilldata">
+<px-data-table id="mytable" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{plantDataTable}}">
+        <px-data-table-column
+          name="source"
+		  label="From Location"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		 <px-data-table-column
+          name="material"
+		  label="Material"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>        
+		<px-data-table-column
+          name="materialDescription"
+		  label="Material Description"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="quantity"
+		  label="Quantity"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>	
+		<px-data-table-column
+          name="Storage_location"
+		  label="To Location"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="uom"
+		  label="Unit of Measure"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>	
+      </px-data-table> 
+	  </div>
+	  <div id="drilldataview" ng-hide="drilldataview">
+	   Stock At {{plantName}} - <b>{{treeDataPlantLevel.totalQuantity}}</b>
+	  </div>
+	  </px-card>
+	   
+      
+	 
+</px-modal>
+ <!-- </template> -->
+ 
+<px-modal id="five" modal-heading="">          
+	   <px-card header-text="">
+	   <div class="container-tabs">
+		<label id="tab3" class="label--inline tab selected" for="basic-form-checkbox" ng-click="tabview3()">
+		{{FSGName}} OVERVIEW</label>
+		<label id="tab5" class="label--inline tab" for="basic-form-checkbox1" ng-click="tabview5()">{{FSGName}} DETAILED DATA</label>
+		
+		</div>
+	    <button class="btn btn--tertiary btn--icon float--right" style="margin-top:-39px;" 
+title="Back to Summary" onclick="editcancelForm1()"><i class="fa fa-times-circle"></i></button> 
+	  <img class="float--right" style="margin-top:-57px; margin-right:54px;" src="../images/excel.png" id="inventoryImageId13" alt="Excel Download" title="Export to Excel">
+	  <div id="drilldata1" ng-hide="drilldata1">
+<px-data-table id="mytable" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{transitdata}}">
+        <px-data-table-column
+          name="source"
+		  label="From Location"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		 <px-data-table-column
+          name="material"
+		  label="Material"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>        
+		<px-data-table-column
+          name="materialDescription"
+		  label="Material Description"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="quantity"
+		  label="Quantity"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>	
+		<px-data-table-column
+          name="Storage_location"
+		  label="To Location"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="uom"
+		  label="Unit of Measure"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>			
+      </px-data-table> 
+	  </div>
+	  <div id="drilldataview1" ng-hide="drilldataview1">
+	   In transit to {{FSGName}} - <b>{{treeDataFSGtLevel.intransitToFSGQuantity}}</b>
+	   <br>Stock at {{FSGName}} - <b>{{treeDataFSGtLevel.stockAtFSGQuantity}}</b>
+	   <br>In transit to CUSTOMER - <b>{{treeDataFSGtLevel.intransitToCustomerQuantity}}</b>
+	   <br>Total - <b>{{treeDataFSGtLevel.intransitToFSGQuantity + treeDataFSGtLevel.stockAtFSGQuantity + treeDataFSGtLevel.intransitToCustomerQuantity }}</b>
+	  </div>
+	  </px-card>
+	   
+      
+	 
+</px-modal>
+	<div id="fsgdrill" ng-hide="fsgdrill" >
+<!--  <template is="dom-bind">
+	  <iron-ajax url="../bower_components/px-data-table/received-fsg.json" last-response="{{fsgreceiveddata}}" auto></iron-ajax>     
+	  <iron-ajax url="../bower_components/px-data-table/installation.json" last-response="{{instalationdata}}" auto></iron-ajax> -->     
+        
+<px-modal id="nine" modal-heading="">          
+	   <px-card header-text="">
+	   <div class="container-tabs">
+		<label id="tab3" class="label--inline tab selected" for="basic-form-checkbox" ng-click="tabview3()">
+		{{FSGNameCustomerLevel}} OVERVIEW</label>
+		<label id="tab5" class="label--inline tab" for="basic-form-checkbox1" ng-click="tabview5()">{{FSGNameCustomerLevel}} DETAILED DATA</label>
+		
+		</div>
+	    <button class="btn btn--tertiary btn--icon float--right" style="margin-top:-39px;" 
+title="Back to Summary" onclick="editcancelForm7()"><i class="fa fa-times-circle"></i></button> 
+	  <img class="float--right" style="margin-top:-57px; margin-right:54px;" id="inventoryImageId16" src="../images/excel.png" alt="Excel Download" title="Export to Excel">
+	  <div id="drilldata1" ng-hide="drilldata1">
+<px-data-table id="mytable" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{transitdataCustomerLevel}}">
+        <px-data-table-column
+          name="source"
+		  label="From Location"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		 <px-data-table-column
+          name="material"
+		  label="Material"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>        
+		<px-data-table-column
+          name="materialDescription"
+		  label="Material Description"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="quantity"
+		  label="Quantity"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>	
+		<px-data-table-column
+          name="Storage_location"
+		  label="To Location"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="uom"
+		  label="Unit of Measure"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>			
+      </px-data-table> 
+	  </div>
+	  <div id="drilldataview1" ng-hide="drilldataview1">
+	   In transit to {{FSGNameCustomerLevel}} - <b>{{treeDataCustomerLevel.intransitToFSGQuantity}}</b>
+	   <br>Stock at {{FSGNameCustomerLevel}} - <b>{{treeDataCustomerLevel.stockAtFSGQuantity}}</b>
+	   <br>In transit to CUSTOMER - <b>{{treeDataCustomerLevel.intransitToCustomerQuantity}}</b>
+	  </div>
+	  </px-card>
+	   
+  </px-modal>
+	  </div >
+	   <!-- model8 start -->
+	   <div id="custdrill" ng-hide="custdrill">
+	   
+	   <px-modal id="eight" modal-heading="">              
+	   <px-card header-text="">
+	   <div class="container-tabs">
+		<label id="tab7" class="label--inline tab selected" for="basic-form-checkbox" ng-click="tabview7()">
+		CUSTOMER({{customerName}}) OVERVIEW</label>
+		<label id="tab9" class="label--inline tab" for="basic-form-checkbox1" ng-click="tabview9()">CUSTOMER({{customerName}}) DETAILED DATA</label>
+		
+		</div>
+	  <button class="btn btn--tertiary btn--icon float--right" style="margin-top:-39px;" 
+title="Back to Summary" onclick="editcancelForm8()"><i class="fa fa-times-circle"></i></button>
+	  <img class="float--right" style="margin-top:-57px; margin-right:54px;" src="../images/excel.png" id="inventoryImageId17" alt="Excel Download" title="Export to Excel">
+	  <div id="drilldata2" ng-hide="drilldata2">
+<px-data-table id="mytable" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{finalData77}}">
+        <px-data-table-column
+          name="customer" type="html"
+		  label="Customer"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="material" type="html"
+		  label="Material"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+        <px-data-table-column
+          name="materialDescription" type="html"
+		  label="Material Description"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>		
+		<px-data-table-column
+          name="intransitQty" type="html"
+		  label="Quantity"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>	
+		
+      </px-data-table>
+		</div>
+	  <div id="drilldataview2" ng-hide="drilldataview2">
+	   Customer Id - <b>{{customerName}}</b>
+	   <br>In transit to - <b>{{intransitToCustomerScope}}</b>
+	   <br>Stock at Customer - <b>{{quantityScope}}</b>
+	   
+	  </div>	  
+	  </px-card>
+	   
+      
+	 
+</px-modal>
+	   </div>
+	   <!-- model8 end -->
+      
+	   <px-modal id="eleven" modal-heading="">              
+	   <px-card header-text="">
+<h3 class="caps u-mv0 style-scope px-card-header" id="headertext">No Data Available</h3>
+<button class="btn btn--tertiary btn--icon float--right" style="margin-top:-39px;" 
+		title="Back to Summary" onclick="editcancelForm11()"><i class="fa fa-times-circle"></i></button>
+	  
+		</px-card>
+	   
+      
+	 
+</px-modal>
+	  
+	  <!-- </template> -->
+ 
+
+<div id="plant-level" class="demo1" ng-hide="plantdata" style="margin-top:-75px;">
+<px-card header-text="Plant Network Visibility">			
+            
+<div id="tree" class="container">
+			<!--<px-tooltip orientation="bottom" smart-orientation="true">
+                <b>1PS1</b><br>Existing - <b>1000</b><br>In transit to FSG - <b>300</b><br>Received at FSG - <b>300</b><br>Total - <b>1000</b>
+            </px-tooltip>
+			
+			 <px-tooltip1 orientation="right">
+			<b>FS California</b><br>Existing - <b>550</b><br>In transit to FSG - <b>150</b><br>Received at FSG - <b>100</b><br>In transit to Customer - <b>300</b><br>Total - <b>550</b>
+            </px-tooltip1>
+            
+			<px-tooltip2 orientation="right">			
+			<b>Walmart</b><br>Existing - <b>0</b><br>In transit to FSG - <b>0</b><br>Received at FSG - <b>0</b><br>In transit to Customer - <b>100</b><br>Total - <b>0</b>
+            </px-tooltip2> -->
+		<div id="tree-view"></div>
+		
+		
+		
+        </div>
+
+</px-card>
+</div>
+</div>
+<div ng-hide="!InvalidUser">
+<h1>You are not Authorized to view this page</h1>
+</div>
+
+<script type="text/javascript">
+          
+		 //$( "div.demo1" ).scrollLeft( 300000 );
+		  
+		function inputLostFocus(evt){
+			Polymer.dom(document).querySelector("#three").modalButtonClicked();
+		}
+
+          function gotoLink(evt){	
+			var row2 = $(evt).children().find('div.content').text();						  
+		  $("#myModal3").css("visibility","visible");
+		  $("#myModal3").show();
+           myE2.myFunction(row2);
+          }
+		  function editcancelForm(evt){		  
+		  $("#myModal3").css("visibility","hidden");	  
+          }
+		  function editcancelForm7(evt){		  
+		  $("#myModal7").css("visibility","hidden");	  
+          }
+		  function editcancelForm8(evt){		  
+		  $("#myModal9").css("visibility","hidden");	  
+          }
+		  function editcancelForm1(evt){		  
+		  $("#myModal5").css("visibility","hidden");	  
+          }
+		  function editcancelForm2(evt){		  
+		  $("#myModal7").css("visibility","hidden");	  
+          }
+		  function editcancelForm11(evt){		  
+		  $("#myModal11").css("visibility","hidden");	  
+          }
+		  
+		  function showIt(evt){		   		  
+			var row7 = $(evt).children().find('div.content').text();					  
+		 	$('#carat').addClass('bottom');
+			$('#tooltipWrapper').removeClass('hidden');
+			
+          }
+		  
+		  function hideIt(evt){ 
+		 	$('#carat').removeClass('bottom');
+			$('#tooltipWrapper').addClass('hidden');
+          }
+		  function showIt1(evt){ 
+				var row5 = $(evt).children().find('div.content').text();						  
+		 	$('#carat1').addClass('bottom');
+			$('#tooltipWrapper1').removeClass('hidden');
+			
+          }
+		  function hideIt1(evt){	  
+		 	$('#carat1').removeClass('bottom');
+			$('#tooltipWrapper1').addClass('hidden');
+          }
+		  function showIt2(evt){
+			var row9 = $(evt).children().find('div.content').text();				
+
+		 	$('#carat2').addClass('bottom');
+			$('#tooltipWrapper2').removeClass('hidden');
+			
+          }
+		  function hideIt2(evt){	  
+		 	$('#carat2').removeClass('bottom');
+			$('#tooltipWrapper2').addClass('hidden');
+          }
+		  
+		var myE2 = angular.element( document.querySelector('#mytable')).scope();
+		function gotoLink1(evt){
+		
+		var row3 = $(evt).children().find('div.content').text();				
+				//console.log(row3);		  		   
+			$("#myModal5").css("visibility","visible");
+           $("#myModal5").show();
+		   	myE2.myFunction1(row3);
+			//console.log('--myE2--');
+ 
+          }
+		  
+		  var myE3 = angular.element( document.querySelector('#mytable')).scope();
+		   function gotoLink2(evt){	
+		var row4 = $(evt).children().find('div.content').text();				
+				//console.log(row4);		   
+		 
+		  
+		  myE3.myFunction2(row4);
+			//console.log('--row4--'+row4);
+            
+          }
+		  function getData(evt){
+			//var myEl = angular.element( document.querySelectorAll( '.cover' ));
+			//myEl.attr('id',"setData1");	
+			
+		   var row1 = $(evt).parent().parent().find('div.content').text();				
+				//console.log(row1);
+          }
+		  
+		$(document).ready(function () {
+		$.getJSON('https://dev-gecurrent-div-services.run.aws-usw02-pr.ice.predix.io/div/plantinventorydrilldown/getPlants', success = function(data){
+		 var options = "";
+		 for(var i=0; i< data.length; i++){
+			 options += '<option value ="' + data[i] + '">' +  data[i]  + '</option>'
+		 }
+			 $("#plants").append(options);
+		 //console.log('options'+options);
+				 });
+		 });
+			
+
+          document.getElementById('four').addEventListener('btnModalPositiveClicked', function() {
+            window.location.href = 'https://www.ge.com';
+          });
+		  
+			// For tree View 	  
+				  function to_ul(children) {
+			var ul = document.createElement("ul");		
+			//ul.id = "tree-data";
+			//ul.class = "loads";
+			//ul.style.display = "none";
+		  for (var i=0, n=children.length; i<n; i++) {
+			  var child = children[i];
+			  var li = document.createElement("li");
+			  			 
+				var text = document.createTextNode(child.data);
+				var hum =  child.id;
+				 li.id = hum;
+				li.appendChild(text);
+
+				if (child.children) {
+					 li.appendChild(to_ul(child.children));
+				}
+
+				ul.appendChild(li);
+			}
+
+			return ul;
+		}
+
+	
+
+function renderTree() {
+  var treeEl = document.getElementById("tree");
+
+	
+	$(document).ready(function () {
+			$.getJSON('https://dev-gecurrent-div-services.run.aws-usw02-pr.ice.predix.io/div/plantinventorydrilldown/getFSGNames?plantName=1PS1',
+			success = function(data){
+			 var options1 = data;
+			 var tmpArr = [];
+			 tmpArr.push(data.rootElement);
+			 treeEl.appendChild(to_ul(tmpArr));     //Dynamic tree
+			 //treeEl.appendChild(to_ul(treeObj.rootElement));  //static tree
+    $('#tree > ul').attr('id', 'tree-data');
+	$('#tree > ul').css('display', 'none');
+	$('#tree > ul > li').attr('id', 'root');
+	$('#tree > ul > li').attr('onclick', 'gotoLink(this)');
+    $('#tree > ul > li').attr('onmouseenter', 'showIt(this)');
+    $('#tree > ul > li').attr('onmouseleave', 'hideIt(this)');
+	
+	//$('#tree > ul > li > ul > li ').attr('id', 'node');
+	$('#tree > ul > li > ul > li ').attr('onclick', 'gotoLink1(this)');
+    $('#tree > ul > li > ul > li ').attr('onmouseenter', 'showIt(this)');
+    $('#tree > ul > li > ul > li ').attr('onmouseleave', 'hideIt(this)');
+	
+	
+	
+	//$('#tree > ul > li > ul > li ul > li').attr('id', 'node1');
+	$('#tree > ul > li > ul > li ul > li').attr('onclick', 'gotoLink2(this)');
+    $('#tree > ul > li > ul > li ul > li').attr('onmouseenter', 'showIt(this)');
+    $('#tree > ul > li > ul > li ul > li').attr('onmouseleave', 'hideIt(this)');
+   
+   
+   
+			$(document).ready(function () {
+				
+						// create a tree
+							$("#tree-data").jOrgChart({
+								chartElement: $("#tree-view"),
+								nodeClicked: nodeClicked
+							});
+
+							// lighting a node in the selection
+							function nodeClicked(node, type) {
+								node = node || $(this);
+								$('.jOrgChart .selected').removeClass('selected');
+								node.addClass('selected');
+							}
+				
+			
+					});
+			
+		});
+	});
+}
+			
+
+        </script>

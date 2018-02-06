@@ -1,0 +1,111 @@
+<style>
+.btn.btn--tertiary.btn--icon
+ {
+    color: #ff9821 !important; }
+</style>
+<div ng-hide="!validUser">
+<px-modal id="four" modal-heading="">   
+<h3 class="caps u-mv0 style-scope px-card-header" id="headertext" style="margin: 0px 0px 0px 18px;">{{idd}}</h3>		
+	   <px-card header-text="Logger Details" style="margin: -18px 0px 0px 0px;"> 	   
+	   <button class="btn btn--tertiary btn--icon float--right" style="margin-top:-53px;" 
+title="Back to Summary" onclick="editcancelForm()"><i class="fa fa-times-circle"></i></button>
+	  
+<px-data-table id="mytable" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{sapLoggerDetails}}">
+		<px-data-table-column
+          name="sapUploadId" type="html"
+		  label="SAP UPLOAD ID"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="errorLog" type="html"
+		  label="Error Log"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+      </px-data-table> 
+	  </px-card>	 
+</px-modal>
+
+	<div id="customerdemand" ng-hide="custdemand">
+	  <px-card header-text="Upload Excel Details">
+	  <!--<img class="float--right" style="margin-top:-70px;" src="../images/excel.png" id="inventoryImageId6" alt="Excel Download" title="Export to Excel">-->
+	<px-data-table id="custdemand" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{logDetailsObj}}">
+		<px-data-table-column
+          name="id" type="html"
+		  label="SAP UPLOAD ID"
+          filterable
+          sortable
+          >
+        </px-data-table-column>
+		<px-data-table-column
+          name="totRecords"
+		  label="TOTAL RECORDS"		  
+          filterable
+		  sortable
+          >
+        </px-data-table-column>
+		
+        <px-data-table-column
+          name="recordsPassed"
+		  label="RECORDS PASSED"
+          filterable
+          sortable
+          >
+        </px-data-table-column>
+		 <px-data-table-column
+          name="recordsFailed"
+		  label="RECORDS FAILED"		  
+          filterable
+		  sortable
+         >
+        </px-data-table-column>		
+		<px-data-table-column
+          name="serviceName" type="html"
+		  label="SERVICE NAME"
+          filterable
+          sortable
+          >
+        </px-data-table-column>
+		<px-data-table-column
+          name="isProcessed" type="html"
+		  label="DB PROCESSED"
+          filterable
+          sortable
+          >
+        </px-data-table-column>
+		
+		<px-data-table-column
+          name="createDtm" type="html" 
+          label="PROCESSED DATE"		  
+          filterable
+          sortable
+          >
+        </px-data-table-column>
+		<px-data-table-column
+          name="status" type="html" 
+          label="STATUS"		  
+          filterable
+          sortable
+          >
+        </px-data-table-column>
+	  </px-card>
+	  
+      
+	</div>
+</div>
+	<div ng-hide="!InvalidUser">
+	<h1>You are not Authorized to view this page</h1>
+	</div>
+<script>
+function drilldownLog(evt){
+//alert("clicked")		  ;
+		  $("#myModal1").css("visibility","visible");
+		  $("#myModal1").show();           
+          }
+		  function editcancelForm(evt){		  
+		  $("#myModal1").css("visibility","hidden");	  
+          }
+</script>

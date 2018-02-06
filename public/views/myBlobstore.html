@@ -1,0 +1,80 @@
+<div style="width:50px; top:120px; position: absolute; left: 750px; z-index: 100;" id="spinnerId" ng-hide="hidePxSpinner">
+     <px-spinner id="spinner" style="z-index:10000;postion:absolute;color:white;"></px-spinner>
+      </div>
+
+<div ng-hide="!validUser">
+<px-card header-text="File Upload">
+ <i class="fa fa-refresh fa-2x float--right" aria-hidden="true" style="margin-top: -58px; margin-right: 0px; color: #ff9821" ng-click="fileUploadData()" title="Refresh"></i>
+
+<form name="myForm" novalidate="">
+<div class="overlay">
+    <div id="loading-img"></div>
+</div>
+<table width="100%" border="0" class="tab1">
+<tr><td colspan="2"><span style="color:green">{{resMsg}}</span><span style="color:#CB4335">{{resErrMsg}}</span>
+</tr><tr>
+<td>Template: </td> 
+<td>
+<select ng-model="templateName" ng-change="clear();">
+<option value=''>Please Select</option>
+<option ng-repeat='item in names' value='{{item.xls_name}}'>{{item.xls_desc}}</option></select>
+</td>
+<td></td>
+<td><button class="btn btn-primary" ng-disabled="showProcessOnDemand" style="background-color:#ff9821;" ng-click="processOnDemand();" ng-disabled="spinner">Process On Demand</button></td>
+<br><p style="color:#CB4335">{{fileProcessingMsg}}</p>
+</tr><tr>
+<td>File: </td>
+<td><input id="fileupload" ng-disabled="templateName == '' || templateName == null" type='file' accept=".csv" file-model="bfile" ng-blur="isValidFileSize()"/>
+  <span ng-show="fname == '' && templateName != null" style="color:#CB4335">Choose file</span>
+  <p>{{fileMsg}}</p>
+</td>
+
+</tr><tr>
+<td>Comments:</td>
+<td><textarea rows="4" cols="50" id="area" ng-model="comments" ng-disabled="templateName == '' || templateName == null" required></textarea>
+  <br><span ng-show="(comments == null || comments == '') && templateName != null" style="color:#CB4335">Comments are required.</span>
+</td>
+</tr><tr>
+<td colspan="2" align="center"><button class="btn btn-primary" style="" ng-hide="myForm.$valid && fname != '' && !btndisable" ng-disabled="myForm.$invalid || fname == ''">Upload</button>
+<button class="btn btn-primary" style="background-color:#ff9821;" ng-show="myForm.$valid && fname != '' && !btndisable" ng-click="upload()">Upload</button>
+</td>
+</tr></table>
+</form>
+</px-card>
+</div>
+<div ng-hide="!InvalidUser">
+<h1>You are not Authorized to view this page</h1>
+</div>
+<style>
+html {font-size:12px;}
+table.tab1 {
+    border-collapse: separate;
+    border-spacing: 10px;
+}
+input.ng-invalid {
+    background-color: pink;
+}
+input.ng-valid {
+    background-color: lightgreen;
+}
+true{
+background-color: lightgreen;
+}
+false {
+    background-color: pink;
+}
+#loading-img {
+	background: url(../images/loading.gif) center center no-repeat;
+	height: 100%;
+	z-index: 20;
+}
+.overlay {
+	display: none;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	opacity:1;
+}
+</style>

@@ -1,0 +1,15 @@
+---
+applications:
+  - name: dev-gecurrent-div
+    buildpack: predix_openresty_buildpack
+    path: dist
+    memory: 1G
+    stack: cflinuxfs2
+    services:
+            - DEV-GECURRENT_DigitalTwin_REDIS_SERVICE
+            - DEV-GECURRENT_DigitalTwin_VIEW_SERVICE
+            - DEV-GECURRENT_DigitalTwin_ASSET_SERVICE
+            #- GE_DigitalTwin_Current_ACS_Service
+    env:
+      UAA_SERVER_URL: https://3239cd0c-9cfd-4cae-b9dd-6d357421a6a2.predix-uaa.run.aws-usw02-pr.ice.predix.io # change to your UAA instance url
+      REDIS: redis-1

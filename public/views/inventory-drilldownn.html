@@ -1,0 +1,464 @@
+
+	   <script type="application/javascript" src="../bower_components/orgchart/jquery-1.11.3.min.js"></script>
+	  <script type="application/javascript" src="../bower_components/orgchart/orgchart.js"></script> 		
+	<script>
+	$(document).ready(function () {
+				// create a tree
+			$("#tree-data").jOrgChart({
+				chartElement: $("#tree-view"),
+				nodeClicked: nodeClicked
+			});
+
+			// lighting a node in the selection
+			function nodeClicked(node, type) {
+				node = node || $(this);
+				$('.jOrgChart .selected').removeClass('selected');
+				node.addClass('selected');
+			}
+		});
+		</script> 		
+		 <link href="../stylesheet/jquerysctipttop.css" rel="stylesheet" type="text/css">		
+		<link href="../stylesheet/orgchart.css" rel="stylesheet" type="text/css"> 
+		
+        <style>
+		  .sample-container {
+                width: 250px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .sample-container-left {
+                width: 250px;
+            }
+            .sample-container-right {
+                width: 250px;
+                float: right;
+            }
+            .hover-tooltip {
+               
+                width: 100px;
+                
+            }
+            .test-el {
+                padding:10px;
+                text-align: center;
+                vertical-align: middle;
+                background-color: gray;
+            }
+        
+		#root{background-color:#7cb5ec;} 
+		.content{padding-top:23px;}
+		.jOrgChart .node {
+	 width: 100px;
+    border:solid 1px #8085e9;
+    -moz-border-radius: 17px;
+    -webkit-border-radius: 17px;
+    border-radius: 17px;
+	}
+	.jOrgChart .multi-tree span .content { border:solid 1px #8085e9;
+    -moz-border-radius: 17px;
+    -webkit-border-radius: 17px;
+    border-radius: 17px;
+padding-top:15px;	}
+        </style>	
+	
+<px-card header-text="Select Plant">
+<form id="myForm>
+<label class="label--inline">Plant List:</label>
+<!-- <input id="customer" class="text-input" ng-change="changeFunction()" ng-model="myModel" placeholder="Enter Site ID" style="width:200px;" required/> -->
+ <select id="plants" class="u-mr+ u-ml+" ng-change="changeFunction()" ng-model="myModel">
+				<option value="">Select</option>
+                <option value="1PS1">1PS1</option>
+                <!-- <option value="1PS2">1PS2</option>
+                <option value="1MVH1">1MVH1</option>
+                <option value="1MVH2">1MVH2</option>
+				<option value="1WDR">1WDR</option> -->
+              </select>			  
+			  <button id="booxx" class="btn btn--primary btn--disabled" disabled="" type="submit" ng-click="submitForm()">Submit</button>
+			</form>
+			 
+			<!-- <div class="sample-container">
+            <div id="hoverDivTop" class="hover-tooltip">Hover for tooltip<br/><span>(top, 5 sec delay)</span></div>
+            <px-tooltip
+                for="hoverDivTop"
+                orientation="top"
+                delay="1000"
+                tooltip-message="Top tooltip">
+            </px-tooltip>
+            <p></p>
+            <div id="hoverDivBottom" class="hover-tooltip">Hover for tooltip<br/><span>(HTML element, bottom, default delay: 1 sec)</span></div>
+            <px-tooltip for="hoverDivBottom" orientation="bottom">
+                Bottom tooltip<br>with html<br><div class='test-el'>HTML Div</div>
+            </px-tooltip>
+            <p></p>
+            <div id="hoverDivLeft" class="hover-tooltip">Hover for tooltip<br/><span>(left, delay: 3 sec)</span></div>
+            <px-tooltip
+                for="hoverDivLeft"
+                delay="1000"
+                orientation="left"
+                tooltip-message="Left tooltip">
+            </px-tooltip>
+            <p></p>
+            <div id="hoverDivRight" class="hover-tooltip">Hover for tooltip<br/><span>(right, default delay: 1 sec)</span></div>
+            <px-tooltip
+                for="hoverDivRight"
+                orientation="right"
+                tooltip-message="Right tooltip">
+            </px-tooltip>
+        </div> -->
+
+			
+</px-card>
+<template is="dom-bind">
+	  <iron-ajax url="../bower_components/px-data-table/dashboard.json" last-response="{{dashboarddata}}" auto></iron-ajax>     
+	  <iron-ajax url="../bower_components/px-data-table/installation.json" last-response="{{instalationdata}}" auto></iron-ajax> 
+        <px-modal id="four" modal-heading="">              
+	   <px-card header-text="Plant 1PS1 Detailed Data">
+	   
+	   <button class="btn btn--tertiary btn--icon float--right" style="margin-top:-53px;" 
+title="Back to Summary" onclick="editcancelForm()"><i class="fa fa-times-circle"></i></button>
+	  <a href="export"><img class="float--right" style="margin-top:-70px; margin-right:54px;" src="../images/excel.png" alt="Excel Download" title="Export to Excel"></a>
+<px-data-table id="mytable" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{dashboarddata}}">
+        <px-data-table-column
+          name="plant" type="html"
+		  label="Plant From"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		 <px-data-table-column
+          name="material" type="html"
+		  label="Material"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+        <px-data-table-column
+          name="Quantity" type="html"
+		  label="Quantity"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="location" type="html"
+		  label="Location"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>		
+      </px-data-table> 
+	  </px-card>
+	   
+      
+	 
+</px-modal>
+ </template>
+ 
+ <template is="dom-bind">
+	  <iron-ajax url="../bower_components/px-data-table/dashboard.json" last-response="{{dashboarddata}}" auto></iron-ajax>     
+	  <iron-ajax url="../bower_components/px-data-table/modal-data-fsg.json" last-response="{{modaldata}}" auto></iron-ajax> 
+        <px-modal id="five" modal-heading="">              
+	   <px-card header-text="Location FS California Detailed Data">
+	   
+	    <button class="btn btn--tertiary btn--icon float--right" style="margin-top:-53px;" 
+title="Back to Summary" onclick="editcancelForm1()"><i class="fa fa-times-circle"></i></button> 
+	  <a href="export"><img class="float--right" style="margin-top:-70px; margin-right:54px;" src="../images/excel.png" alt="Excel Download" title="Export to Excel"></a>
+<px-data-table id="mytable" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{modaldata}}">
+        <px-data-table-column
+          name="plant" type="html"
+		  label="Location"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		 <px-data-table-column
+          name="material" type="html"
+		  label="Material"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>        
+		<px-data-table-column
+          name="location" type="html"
+		  label="Sub Location"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="Quantity" type="html"
+		  label="Quantity"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>		
+      </px-data-table> 
+	  </px-card>
+	   
+      
+	 
+</px-modal>
+ </template>
+ 
+ <template is="dom-bind">
+	  <iron-ajax url="../bower_components/px-data-table/received-fsg.json" last-response="{{fsgreceiveddata}}" auto></iron-ajax>     
+	  <iron-ajax url="../bower_components/px-data-table/installation.json" last-response="{{instalationdata}}" auto></iron-ajax>     
+       <px-modal id="seven" modal-heading="">              
+	   <px-card header-text="Site Walmart-A Detailed Data">
+	   
+	  <button class="btn btn--tertiary btn--icon float--right" style="margin-top:-53px;" 
+title="Back to Summary" onclick="editcancelForm2()"><i class="fa fa-times-circle"></i></button>
+	  <a href="export"><img class="float--right" style="margin-top:-70px; margin-right:54px;" src="../images/excel.png" alt="Excel Download" title="Export to Excel"></a>
+<px-data-table id="mytable" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{fsgreceiveddata}}">
+        <px-data-table-column
+          name="location" type="html"
+		  label="Location"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="material" type="html"
+		  label="Material"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+        <px-data-table-column
+          name="Quantity" type="html"
+		  label="Quantity"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>							
+      </px-data-table> 
+	  </px-card>
+	   
+      
+	 
+</px-modal>
+	  
+	   
+      
+	  </template>
+ 
+
+<div id="plant-level" ng-hide="plantdata">
+<px-card header-text="Plant Invenotry Drilldown">
+			<px-tooltip for="hoverDivBottom" orientation="bottom" style="left: 625.563px; top: 293px;">
+                <b>1PS1</b><br>Existing - <b>1000</b><br>In transit to FSG - <b>300</b><br>Received at FSG - <b>300</b><!-- <br>In transit to Customer - <b>400</b> --><br>Total - <b>1000</b>
+            </px-tooltip>
+			<p></p>
+			
+			<!-- <px-tooltip1 for="hoverDivBottom" orientation="bottom" style="left: 225.563px; top: 394px;"> -->
+			<px-tooltip1 for="hoverDivBottom" orientation="bottom" style="left: 625.563px; top: 293px;">
+			<b>FS California</b><br>Existing - <b>550</b><br>In transit to FSG - <b>150</b><br>Received at FSG - <b>100</b><br>In transit to Customer - <b>300</b><br>Total - <b>550</b>
+            </px-tooltip1>
+            <p></p>
+			<px-tooltip2 for="hoverDivBottom" orientation="bottom" style="left: 625.563px; top: 293px;">
+			<!-- <px-tooltip2 for="hoverDivBottom" orientation="bottom" style="left: 200.563px; top: 490px;"> -->
+			<b>Walmart</b><br>Existing - <b>0</b><br>In transit to FSG - <b>0</b><br>Received at FSG - <b>0</b><br>In transit to Customer - <b>100</b><br>Total - <b>0</b>
+            </px-tooltip2>
+            <p></p>
+			
+<div id="chart-container"></div>			
+			
+<div class="container">
+  <!-- <div id="hoverDivBottom" class="hover-tooltip">HTML element, bottom, default delay: 1 sec)</div>  -->
+            
+             	
+			
+			
+		<ul id="tree-data" style="display:none;">
+			<li id="root" onclick="gotoLink()" onmouseenter="showIt()" onmouseleave="hideIt()">
+				1PS1
+				<ul>
+					<li id="node1" onclick="gotoLink1()" onmouseenter="showIt1()" onmouseleave="hideIt1()" style="background-color:#f7a35c;">
+						FS California
+						<ul>
+							<li id="node19" onclick="gotoLink2()" onmouseenter="showIt2()" onmouseleave="hideIt2()" style="background-color:#90ed7d;">
+								Walmart - A
+							</li>
+							<li id="node20" onclick="gotoLink2()" style="background-color:#90ed7d;">
+								Tata - A
+							</li>
+						</ul>
+					</li>
+					<li id="node2" onclick="gotoLink1()" onmouseenter="showIt1()" onmouseleave="hideIt1()" style="background-color:#f7a35c;">
+						FS Illinois
+						<ul>
+							<li id="node3" onclick="gotoLink1()" onmouseenter="showIt1()" onmouseleave="hideIt1()" style="background-color:#f7a35c;">
+								FS Texas
+								<ul>
+									<li id="node4" onclick="gotoLink2()" style="background-color:#90ed7d;">
+										Walmart - A
+										
+									</li>
+									<li id="node11" onclick="gotoLink2()" style="background-color:#90ed7d;">
+										Tata - A
+										
+									</li>
+								</ul>
+							</li>
+							<li id="node18" onclick="gotoLink1()" onmouseenter="showIt1()" onmouseleave="hideIt1()" class="last" style="background-color:#f7a35c;">
+								FS California
+								<ul>
+									<li id="node19" onclick="gotoLink2()" style="background-color:#90ed7d;">
+										Walmart - B
+									</li>
+									
+								</ul>
+							</li>
+						</ul>
+					</li>
+					
+					<li id="node28" onclick="gotoLink1()" onmouseenter="showIt1()" onmouseleave="hideIt1()" class="last" style="background-color:#f7a35c;">
+						FS New Jersey
+						<ul>
+							<li id="node29" onclick="gotoLink1()" onmouseenter="showIt1()" onmouseleave="hideIt1()" style="background-color:#f7a35c;">
+								FS California
+								<ul type="vertical">
+									<li id="node30" onclick="gotoLink1()" onmouseenter="showIt1()" onmouseleave="hideIt1()" style="background-color:#f7a35c;">
+										FS Texas
+										<ul>
+											<li id="node31" onclick="gotoLink2()" style="background-color:#90ed7d;">
+												Walmart - A
+											</li>
+
+											<li id="node32" onclick="gotoLink2()" style="background-color:#90ed7d;">
+												Tata - A
+											</li>
+										</ul>
+									</li>									
+								</ul>
+								
+							</li>
+
+							<li id="node36" onclick="gotoLink1()" onmouseenter="showIt1()" onmouseleave="hideIt1()" style="background-color:#f7a35c;">
+								FS Illinois
+								<ul>
+											<li id="node34" onclick="gotoLink2()" style="background-color:#90ed7d;">
+												Walmart - A
+											</li>
+
+											
+										</ul>
+							</li>
+						</ul>
+					</li>
+					<li id="node21" onclick="gotoLink1()" onmouseenter="showIt1()" onmouseleave="hideIt1()" style="background-color:#f7a35c;">
+						FS Texas
+						
+						<ul type="">
+							<li id="node3" onmouseenter="showIt1()" onmouseleave="hideIt1()" style="background-color:#f7a35c;">
+								FS Illinois
+								<ul>
+									<!-- <li id="node4" onclick="gotoLink2()" style="background-color:#90ed7d;">
+										Walmart - A
+										
+									</li> -->
+									<li id="node11" onclick="gotoLink2()" style="background-color:#90ed7d;">
+										Tata - A
+										
+									</li>
+								</ul>
+							</li>
+							<li id="node18" onclick="gotoLink1()" onmouseenter="showIt1()" onmouseleave="hideIt1()" class="last" style="background-color:#f7a35c;">
+								FS New Jersey
+								<ul>
+									<li id="node19" onclick="gotoLink2()" style="background-color:#90ed7d;">
+										Walmart - B
+									</li>
+									
+								</ul>
+							</li>
+						</ul>
+						
+					</li>
+				</ul>
+			</li>
+			<li id="node37">
+				node37
+			</li>
+		</ul>
+
+		<div id="tree-view"></div>
+	
+			
+            <p></p>
+        </div>
+<!-- <img src="../images/dummy2.png" alt=""> -->
+</px-card>
+</div>
+<script>
+          function inputLostFocus(evt){
+            Polymer.dom(document).querySelector("#three").modalButtonClicked();
+          }
+
+          function gotoLink(evt){		  
+		  $("#myModal3").css("visibility","visible");
+		  $("#myModal3").show();
+           
+          }
+		  function editcancelForm(evt){		  
+		  $("#myModal3").css("visibility","hidden");	  
+          }
+		  function editcancelForm1(evt){		  
+		  $("#myModal5").css("visibility","hidden");	  
+          }
+		  function editcancelForm2(evt){		  
+		  $("#myModal7").css("visibility","hidden");	  
+          }
+		  function showIt(evt){  
+		 	$('#carat').addClass('bottom');
+			$('#tooltipWrapper').removeClass('hidden');
+			
+          }
+		  function hideIt(evt){		  
+		 
+			$('#carat').removeClass('bottom');
+			$('#tooltipWrapper').addClass('hidden');
+          }
+		  function showIt1(evt){  
+		 	$('#carat1').addClass('bottom');
+			$('#tooltipWrapper1').removeClass('hidden');
+			
+          }
+		  function hideIt1(evt){	  
+		 	$('#carat1').removeClass('bottom');
+			$('#tooltipWrapper1').addClass('hidden');
+          }
+		  function showIt2(evt){  
+		 	$('#carat2').addClass('bottom');
+			$('#tooltipWrapper2').removeClass('hidden');
+			
+          }
+		  function hideIt2(evt){	  
+		 	$('#carat2').removeClass('bottom');
+			$('#tooltipWrapper2').addClass('hidden');
+          }
+		  
+		  function gotoLink1(evt){		  
+		   var myEl = angular.element( document.querySelectorAll( '.modal' )[1] );
+			myEl.attr('id',"myModal5");
+			$("#myModal5").css("visibility","visible");
+           $("#myModal5").show();
+          }
+		   function gotoLink2(evt){		 
+		   var myEl = angular.element( document.querySelectorAll( '.modal' )[2] );
+			myEl.attr('id',"myModal7");
+		  $("#myModal7").css("visibility","visible");
+		  $("#myModal7").show();
+            
+          }
+		  function getData(evt){
+			//var myEl = angular.element( document.querySelectorAll( '.cover' ));
+			//myEl.attr('id',"setData1");		  
+		   var row1 = $(evt).parent().parent().find('div.content').text();				
+				console.log(row1);
+          }
+
+          document.getElementById('four').addEventListener('btnModalPositiveClicked', function() {
+            window.location.href = 'https://www.ge.com';
+          });
+        </script>

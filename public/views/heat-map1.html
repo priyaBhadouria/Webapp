@@ -1,0 +1,98 @@
+<!-- <style>
+google-map {
+    margin-top: 23px;
+    position: absolute;
+    display: block;
+    height: 93%;
+    width: 82%;
+}
+</style> -->
+ <!-- <google-map id="googlemap" latitude="37.779" longitude="-122.3892" min-zoom="9" max-zoom="11" libraries="visualization" >
+
+    </google-map> 
+	<google-map-heatmap id="heatmap"></google-map-heatmap> -->
+    <!--  <google-map id='gmap2' latitude="37.77493" longitude="-122.41942" libraries="visualization" on-google-map-ready="_mapLoaded">
+    </google-map>
+	<heatmap-element></heatmap-element> --> 
+<!-- <div id="heat-map" ng-hide="maps">
+ <google-map id='gmap2' latitude="37.77493" longitude="-122.41942" libraries="visualization" on-google-map-ready="_mapLoaded">
+	 
+    </google-map>
+	<button ng-click="toggleHeatmap()">heatmap1</button>
+	<heatmap-element></heatmap-element>
+	</div> -->
+ 
+ <div id="earth-map" ng-hide="map">
+ <button ng-click="toggleHeatmap()">Toggle Heatmap</button>
+ <google-map latitude="36.778259" longitude="-119.417931" min-zoom="5" max-zoom="9"
+              language="en" api-key="AIzaSyCp9PTWBsdRZou2uO0uUB6CACqwgyVN534">
+			  
+    <google-map-marker latitude="36.778259" longitude="-121.017931"
+                       title="FS California" draggable="true" icon="http://maps.google.com/mapfiles/ms/icons/yellow-dot.png" drag-events>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/San_Francisco_Giants_Cap_Insignia.svg/200px-San_Francisco_Giants_Cap_Insignia.svg.png" />
+    </google-map-marker>
+	 <google-map-marker latitude="36.018259" longitude="-119.917931" icon="http://maps.google.com/mapfiles/ms/icons/blue-dot.png" title="FS California">
+      <b>Walmart</b><br>
+	  Assets From: <b>FS California</b><br>
+	  Installed Assets: <b>210 units</b><br>
+	  Remaining Assets: <b>137 units</b><br>
+    </google-map-marker>
+	<google-map-marker latitude="36.278259" longitude="-119.217931" icon="http://maps.google.com/mapfiles/ms/icons/green-dot.png" title="FS California">
+      <b>FS California</b><br>
+	  Sites Served: <b>4</b><br>
+	  Installed Assets: <b>210 units</b><br>
+	  Remaining Assets: <b>137 units</b><br>
+    </google-map-marker>
+	<google-map-marker latitude="36.078259" longitude="-119.017931" icon="http://maps.google.com/mapfiles/ms/icons/red-dot.png" title="FS California">
+      <b>FS California</b><br>
+	  Sites Served: <b>4</b><br>
+	  Installed Assets: <b>210 units</b><br>
+	  Remaining Assets: <b>137 units</b><br>
+    </google-map-marker>
+	<google-map-marker latitude="36.278259" longitude="-119.717931" icon="http://maps.google.com/mapfiles/ms/icons/orange-dot.png" title="FS California">
+      <b>FS California</b><br>
+	  Sites Served: <b>4</b><br>
+	  Installed Assets: <b>210 units</b><br>
+	  Remaining Assets: <b>137 units</b><br>
+    </google-map-marker>
+    <google-map-poly closed fill-color="red" fill-opacity=".25" stroke-weight="1">
+      <google-map-point latitude="37.779" longitude="-122.3892"></google-map-point>
+      <google-map-point latitude="37.804" longitude="-122.2711"></google-map-point>
+      <google-map-point latitude="37.386" longitude="-122.0837"></google-map-point>
+    </google-map-poly>
+	
+	<google-map-poly closed fill-color="green" fill-opacity=".25" stroke-weight="1">
+      <google-map-point latitude="37.579" longitude="-122.3892"></google-map-point>
+      <google-map-point latitude="37.604" longitude="-122.2711"></google-map-point>
+      <google-map-point latitude="37.186" longitude="-122.0837"></google-map-point>
+    </google-map-poly> 
+  
+   <google-map-directions start-address="San Jose" end-address="Tracy"
+                         language="en" api-key="AIzaSyCp9PTWBsdRZou2uO0uUB6CACqwgyVN534">Jai</google-map-directions>
+  <google-map-directions start-address="Oakland" end-address="Mountain View"
+                         language="en" api-key="AIzaSyCp9PTWBsdRZou2uO0uUB6CACqwgyVN534">troy</google-map-directions>
+					 <google-map-directions start-address="California" end-address="Los Angeles" language="en" api-key="AIzaSyCp9PTWBsdRZou2uO0uUB6CACqwgyVN534"></google-map-directions> 	
+  </google-map>  
+  </div>
+  <!-- <google-map latitude="41.876" longitude="-87.624" zoom="11" kml="../ggeoxml/cta.kml" language="en" api-key="AIzaSyCp9PTWBsdRZou2uO0uUB6CACqwgyVN534"></google-map> -->
+  
+  <!-- <google-map latitude="41.876" longitude="-87.624" zoom="11" kml="http://googlemaps.github.io/js-v2-samples/ggeoxml/cta.kml" api-key="AIzaSyCp9PTWBsdRZou2uO0uUB6CACqwgyVN534"></google-map> -->
+
+<!--   <google-map-directions start-address="Oakland" end-address="Mountain View"
+                         language="en" api-key="[[apiKey]]"></google-map-directions> -->
+<!-- 
+<google-map latitude="37.779" longitude="-122.3892" min-zoom="9" max-zoom="11"
+              language="en" api-key="AIzaSyCp9PTWBsdRZou2uO0uUB6CACqwgyVN534">
+    <google-map-marker latitude="37.779" longitude="-122.3892"
+                       title="Go Giants!" draggable="true" drag-events>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/San_Francisco_Giants_Cap_Insignia.svg/200px-San_Francisco_Giants_Cap_Insignia.svg.png" />
+    </google-map-marker> 	
+  </google-map> -->
+<!-- 
+  <google-map latitude="37.779" longitude="-122.3892" zoom="13"
+      api-key="AIzaSyCp9PTWBsdRZou2uO0uUB6CACqwgyVN534"></google-map>
+	  <google-map latitude="37.779" longitude="-122.3892"
+    api-key="AIzaSyCp9PTWBsdRZou2uO0uUB6CACqwgyVN534" zoom="13">
+  <google-map-marker latitude="37.779" longitude="-122.3892"
+      title="Go Giants!" draggable="true"></google-map-marker>
+</google-map> -->

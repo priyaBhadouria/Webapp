@@ -1,0 +1,1085 @@
+ <style type="text/css">
+        .chart .highcharts-tooltip > span{ width: 175px;float: left; margin: 0 }
+        .chart .highcharts-tooltip .header{ font-weight: bold; width: 154px!important; height: auto!important; float: left; border-bottom: 1px solid #bebebe;  margin: 1px 0 5px 1px!important; padding: 5px 10px;background-color: rgba(255,255,255,1);
+            -webkit-border-top-left-radius: 5px;
+            -webkit-border-top-right-radius: 5px;
+            -moz-border-radius-topleft: 5px;
+            -moz-border-radius-topright: 5px;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;}
+        .chart .highcharts-tooltip .circle{width: 12px; height: 12px; border-radius: 24px; float: left;  margin: 2px 5px 5px 10px;clear: left}
+        .chart .highcharts-tooltip p.country{float: left; margin-right: 0}
+        .chart .highcharts-tooltip p{float: right; font-size: 12px; margin-right: 10px;}
+		g.highcharts-range-selector-buttons>.highcharts-button {display:block;}
+		g.highcharts-navigator-handle-left>.highcharts-button {display:block;}
+		.highcharts-button[transform="translate(932,71)"] {display:block !important; }
+    </style>
+
+	<input type="text" ng-model="overview" ng-focus="hideShowFun()" id="testing1" style="opacity:0;height:0px;">
+	<input type="text" ng-model="overview1" ng-focus="hideShowFun1()" id="testing2" style="opacity:0;height:0px;">
+	<input type="text" ng-model="overview2" ng-focus="hideShowFun2()" id="testing3" style="opacity:0;height:0px;">
+	
+	<input type="text" ng-model="overview7" ng-focus="hideShowFun7()" id="testing7" style="opacity:0;height:0px;">
+	<input type="text" ng-model="overview9" ng-focus="hideShowFun9()" id="testing9" style="opacity:0;height:0px;">
+	
+ <!-- <template is="dom-bind">
+     {{consumptionpop}}
+	  <iron-ajax url="../bower_components/px-data-table/consumptionpop.json" last-response="{{consumptionpop}}" auto></iron-ajax> -->  
+<div ng-hide="!validUser">	  
+        <px-modal id="five" modal-heading="">              
+	   <px-card header-text="Customer Consumption Detailed Data">
+	   
+	    <button class="btn btn--tertiary btn--icon float--right" style="margin-top:-53px;" 
+title="Back to Summary" onclick="editcancelForm()"><i class="fa fa-times-circle"></i></button> 
+	   <img class="float--right" style="margin-top:-70px; margin-right:54px;" src="../images/excel.png"  id="inventoryImageConsumptionpop" alt="Excel Download" title="Export to Excel"></a>
+           
+<px-data-table id="mytable" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{consumptionpop}}">
+		<px-data-table-column
+          name="custId" type="html"
+		  label="Customer ID"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		 <px-data-table-column
+          name="custDesc" type="html"
+		  label="Customer Name"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="custConsumptions"
+		  label="Quantity"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="installationLoc" type="html"
+		  label="FSG Served"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>	
+	<px-data-table-column
+          name="date" type="html"
+		  label="Date of Installation"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>			
+      </px-data-table> 
+	  </px-card>
+	   
+      
+	 
+</px-modal>
+ <!-- </template> -->
+ 
+ 
+ 
+ <!--<template is="dom-bind">
+	  <iron-ajax url="../bower_components/px-data-table/returnpop.json" last-response="{{returnpop}}" auto></iron-ajax> -->    
+	       
+       <px-modal id="seven" modal-heading="">              
+	   <px-card header-text="Customer Returns Detailed Data">
+	   
+	  <button class="btn btn--tertiary btn--icon float--right" style="margin-top:-53px;" 
+title="Back to Summary" onclick="editcancelForm1()"><i class="fa fa-times-circle"></i></button>
+	   <img class="float--right" style="margin-top:-70px; margin-right:54px;" src="../images/excel.png" id="inventoryImageReturnpop" alt="Excel Download" title="Export to Excel"></a>
+           
+<px-data-table id="mytable" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{returnpop}}">
+		<px-data-table-column
+          name="custId" type="html"
+		  label="Customer ID"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		 <px-data-table-column
+          name="custDesc" type="html"
+		  label="Customer Name"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+        <!--<px-data-table-column
+          name="material" type="html"
+		  label="Material"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>	
+		<px-data-table-column
+          name="materialdesc" type="html"
+		  label="Material Desc"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>-->
+		<px-data-table-column
+          name="Quantity" type="html"
+		  label="Material Return Count"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="fsgserved" type="html"
+		  label="FSG Returned"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>	        						
+      </px-data-table> 
+	  </px-card>
+</px-modal>
+	<!--</template>-->
+	
+	 <!--<template is="dom-bind">
+	  <iron-ajax url="../bower_components/px-data-table/returnpop.json" last-response="{{returnpop}}" auto></iron-ajax>   -->  
+	       
+       
+<!--</template>-->
+	 <!-- <template is="dom-bind">
+	  <iron-ajax url="../bower_components/px-data-table/returnpop.json" last-response="{{returnpop}}" auto></iron-ajax>    -->
+	       
+       <px-modal id="fsgReceived_id" modal-heading="">              
+	   <px-card header-text="FSG Received Detailed Data">
+	   
+	  <button class="btn btn--tertiary btn--icon float--right" style="margin-top:-53px;" 
+	title="Back to Summary" onclick="editcancelfsgReceivedForm()"><i class="fa fa-times-circle"></i></button>
+	   <img class="float--right" style="margin-top:-70px; margin-right:54px;" src="../images/excel.png" id="inventoryImageFsgReceiveddrillData" alt="Excel Download" title="Export to Excel"></a>
+           
+	<px-data-table id="mytable" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{fsgReceiveddrillData}}">
+		
+		<px-data-table-column
+          name="fsgserved"
+		  label="FSG"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>	 
+		
+		<px-data-table-column
+          name="Quantity"
+		  label="Quantity"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		
+		<px-data-table-column
+          name="date" type="html"
+		  label="Date of Received"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>			
+      </px-data-table> 
+	  </px-card>
+	</px-modal>
+<!--</template>-->
+	   
+
+
+
+
+<px-modal id="fsgIssued_id" modal-heading="">              
+	   <px-card header-text="FSG Issued Detailed Data">
+	   
+	  <button class="btn btn--tertiary btn--icon float--right" style="margin-top:-53px;" 
+	title="Back to Summary" onclick="editcancelfsgIssuedForm1()"><i class="fa fa-times-circle"></i></button>
+	   <img class="float--right" style="margin-top:-70px; margin-right:54px;" src="../images/excel.png" id="inventoryImageFsgIssueddrillData" alt="Excel Download" title="Export to Excel"></a>
+           
+	<px-data-table id="mytable" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{fsgIssueddrillData}}">
+		
+		<px-data-table-column
+          name="fsgserved"
+		  label="FSG"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>	
+		
+		<px-data-table-column
+          name="Quantity"
+		  label="Quantity"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		 
+		<px-data-table-column
+          name="date"
+		  label="Date of Issued"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>			
+      </px-data-table> 
+	  </px-card>
+	</px-modal>
+
+	
+<!-- 	Demand And Supply -->
+		  <px-modal id="eight" modal-heading="">              
+	   <px-card header-text="Demand and Supply Inventory Detailed Table">
+	   
+	   <button class="btn btn--tertiary btn--icon float--right" style="margin-top:-53px;" 
+title="Back to Summary" onclick="editcancelForm8()"><i class="fa fa-times-circle"></i></button>
+	   <img class="float--right" style="margin-top:-70px; margin-right:54px;" src="../images/excel.png" id="inventoryImageDsInventoryPopUpData" alt="Excel Download" title="Export to Excel"></a>
+	<px-data-table id="mytable" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{dsInventoryPopUpData}}">
+		<px-data-table-column
+          name="location" type="html"
+		  label="Location"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="material" type="html"
+		  label="Material"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		
+		<px-data-table-column
+          name="materialdesc" type="html"
+		  label="Material Description"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		
+        <px-data-table-column
+          name="Quantity" type="html"
+		  label="Quantity"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>	
+		<px-data-table-column
+          name="productcost" type="html"
+		   label="Product Cost($$)"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="unitofmeasure" type="html"
+		  label="Unit of Measure"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+        <px-data-table-column
+          name="transaction_date" type="html"
+		  label="Date"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>	
+	</px-data-table> 
+	  </px-card>	 
+	</px-modal>
+
+	  
+<px-modal id="nine" modal-heading="">              
+<px-card header-text="Demand and Supply InTransit Detailed Table">
+	   
+	   <button class="btn btn--tertiary btn--icon float--right" style="margin-top:-53px;" 
+title="Back to Summary" onclick="editcancelForm3()"><i class="fa fa-times-circle"></i></button>
+	   <img class="float--right" style="margin-top:-70px; margin-right:54px;" src="../images/excel.png" id="inventoryImageDsInTransitPopUpData" alt="Excel Download" title="Export to Excel"></a>
+<px-data-table id="mytable" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{dsInTransitPopUpData}}">
+        <px-data-table-column
+          name="receivedfrom" type="html"
+		  label="FROM Location"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		 <px-data-table-column
+          name="material" type="html"
+		  label="Material"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="materialdesc" type="html"
+		  label="Material Description"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="location" type="html"
+		  label="TO Location"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+        <px-data-table-column
+          name="Quantity" type="html"
+		  label="Quantity"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>		
+		<px-data-table-column
+          name="productcost" type="html"
+		   label="Product Cost($$)"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="unitofmeasure" type="html"
+		  label="Unit of Measure"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="pronumber" type="html"
+		  label="PRO Number"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="carriername" type="html"
+		  label="Carrier Number"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>	
+		<px-data-table-column
+          name="transaction_date" type="html"
+		  label="Date"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>	
+      </px-data-table> 
+	  </px-card>	 
+</px-modal>
+
+<px-modal id="ten" modal-heading="">              
+<px-card header-text="Demand and Supply Demand Detailed Table">	   
+	   <button class="btn btn--tertiary btn--icon float--right" style="margin-top:-53px;" 
+title="Back to Summary" onclick="editcancelForm4()"><i class="fa fa-times-circle"></i></button>
+	   <img class="float--right" style="margin-top:-70px; margin-right:54px;" src="../images/excel.png" id="inventoryImageDsDemandPopUpData" alt="Excel Download" title="Export to Excel"></a>
+<px-data-table id="mytable" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{dsDemandPopUpData}}">
+		<px-data-table-column
+          name="custcode" type="html"
+		  label="Customer Id"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<!--<px-data-table-column
+          name="custname" type="html"
+		  label="Customer Name"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+         <px-data-table-column
+          name="material" type="html"
+		  label="Material"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		 <px-data-table-column
+          name="materialdesc" type="html"
+		  label="Material Description"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column> -->
+        <px-data-table-column
+          name="demand_qty" type="html"
+		  label="Demand Quantity"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<!--<px-data-table-column
+          name="productcost" type="html"
+		   label="Product Cost($$)"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		 <px-data-table-column
+          name="demand_week" type="html"
+		  label="Demand Week"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column> 
+		<px-data-table-column
+          name="shortage_qty" type="html"
+		  label="Shortage Quantity"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>		-->
+      
+	 <!--  <px-data-table-column
+          name="unitofmeasure" type="html"
+		  label="Unit of Measure"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column> -->
+		
+		<!-- <px-data-table-column
+          name="unitofmeasure" type="html"
+		  label="Serving Location"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column> -->
+		<px-data-table-column
+          name="demand_week" type="html"
+		  label="Fiscal Week"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="year" type="html"
+		  label="Year"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="transaction_date" type="html"
+		  label="Date"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>	
+      </px-data-table> 
+	  </px-card>	 
+</px-modal>
+
+<px-modal id="eleven" modal-heading="">              
+<px-card header-text="Demand and Supply Shortage Detailed Table">	   
+	   <button class="btn btn--tertiary btn--icon float--right" style="margin-top:-53px;" 
+title="Back to Summary" onclick="editcancelForm5()"><i class="fa fa-times-circle"></i></button>
+	   <img class="float--right" style="margin-top:-70px; margin-right:54px;" src="../images/excel.png" id="inventoryImageDsShortagePopUpData" alt="Excel Download" title="Export to Excel"></a>
+<px-data-table id="mytable" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{dsShortagePopUpData}}">
+		<px-data-table-column
+          name="custcode" type="html"
+		  label="Customer Id"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<!--<px-data-table-column
+          name="custname" type="html"
+		  label="Customer Name"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+         <px-data-table-column
+          name="material" type="html"
+		  label="Material"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		 <px-data-table-column
+          name="materialdesc" type="html"
+		  label="Material Description"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column> 
+        <px-data-table-column
+          name="demand_qty" type="html"
+		  label="Demand Quantity"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>-->
+		<!--<px-data-table-column
+          name="productcost" type="html"
+		   label="Product Cost($$)"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		 <px-data-table-column
+          name="demand_week" type="html"
+		  label="Demand Week"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column> -->
+		<px-data-table-column
+          name="shortage_qty" type="html"
+		  label="Shortage Quantity"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>		
+      
+	 <!--  <px-data-table-column
+          name="unitofmeasure" type="html"
+		  label="Unit of Measure"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column> -->
+		
+		<!-- <px-data-table-column
+          name="unitofmeasure" type="html"
+		  label="Serving Location"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column> -->
+		<px-data-table-column
+          name="demand_week" type="html"
+		  label="Fiscal Week"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="year" type="html"
+		  label="Year"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="transaction_date" type="html"
+		  label="Date"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>	
+      </px-data-table> 
+	  </px-card>	 
+</px-modal>
+ 
+	
+	<div id="summary" ng-hide = "summary" style="margin-top:-20px;">
+ <px-card header-text="Select View">
+ 
+ <input type="checkbox" ng-model="answers[item.questID]" ng-change="stateChanged(item.questID)" ng-init="answers[item.questID]=true" /> <!-- Pass the specific id -->
+ <label class="label--inline" for="basic-form-checkbox">Demand & Supply Trend</label>
+ <input type="checkbox" ng-model="answers1[item1.questID1]" ng-change="stateChanged1(item1.questID1)" ng-init="answers1[item1.questID1]=true" /> <!-- Pass the specific id -->
+ <label class="label--inline" for="basic-form-checkbox">Customer consumption trend</label>
+ <input type="checkbox" ng-model="answers2[item2.questID2]" ng-change="stateChanged2(item2.questID2)" ng-init="answers2[item2.questID2]=true" /> <!-- Pass the specific id -->
+ <label class="label--inline" for="basic-form-checkbox">FSG Operational trend</label>
+ 
+<!-- <input id="basic-form-checkbox" class="inform" type="checkbox" ng-change="changeFunction7()" ng-model="am" ng-checked="true"><label class="label--inline" for="basic-form-checkbox">Demand & Supply Trend</label>
+<input id="basic-form-checkbox1" class="inform" type="checkbox" ng-change="changeFunction9()"  ng-model="am1" ng-checked="true"><label class="label--inline" for="basic-form-checkbox">Customer consumption trend</label>
+<input id="basic-form-checkbox2"  class="inform" type="checkbox" ng-change="changeFunction11()"  ng-model="am2" ng-checked="true"><label class="label--inline" for="basic-form-checkbox">FSG Operational trend</label> -->
+</px-card> 
+
+  
+	 
+
+<div ng-hide = "demandd" style="margin-top:-20px;">	 
+		  <px-card header-text="Demand & Supply Trend">
+			<highchart class="chart" config="chartConfig" class="span9" ></highchart>
+		  </px-card>
+		  </div>
+		  <div ng-hide = "demanddd">
+		  <px-card header-text="Customer consumption trend">
+		   <form id="myForm" class="float--right">
+<label class="label--inline">Customer Site ID:</label>
+ <select id="customer" class="u-mr+ u-ml+" ng-change="changeFunction3()" ng-model="myModel1">
+				<option value="">All</option>
+                <!-- <option value="142623">142623</option>
+                 <option value="158841">158841</option>  -->   
+				<option ng-repeat="data in customerSiteIdDropdown">{{data}}</option>				 
+              </select>			  
+			 <!--  <button id="booxx" class="btn btn--primary btn--disabled" disabled="" type="submit" ng-click="submitForm()">Submit</button> -->
+			</form>
+			<div ng-hide="custdata">			
+			<highchart class="chart" config="chartConfig5" class="span9" ></highchart>
+			</div>
+			
+			
+			
+		  </px-card>
+		  </div>
+		  <div ng-hide = "demandddd">
+		  <px-card header-text="FSG Operational trend">
+		  <form id="myForm" class="float--right">
+<label class="label--inline">Service Provider List:</label>
+ <select id="fsgs" class="u-mr+ u-ml+" ng-change="changeFunction1()" ng-model="myModel3">
+				<option value="">All</option>
+                <!-- <option value="FSIL">FSIL</option>
+                 <option value="FSTX">FSTX</option> -->   
+					<option ng-repeat="data in serviceProviderDropdown">{{data}}</option>
+              </select>			  
+			 <!--  <button id="booxx" class="btn btn--primary btn--disabled" disabled="" type="submit" ng-click="submitForm()">Submit</button> -->
+			</form>
+			<div ng-hide="plantdata">			
+			<highchart class="chart" config="chartConfig7" class="span9" ></highchart>
+			</div>
+			
+		  </px-card>
+		  </div>
+		 <!--  <px-card header-text="Select Service Provider">
+<form id="myForm>
+<label class="label--inline">Service Provider List:</label>
+ <select id="fsg" class="u-mr+ u-ml+" ng-change="changeFunction()" ng-model="myModel">
+				<option value="">Select</option>
+                <option value="FSIL">FSIL</option>
+                 <option value="1PS2">FSTX</option>
+                <option value="1MVH1">FSCA</option>
+                <option value="1MVH2">FSNJ</option>				 
+              </select>			  
+			  <button id="booxx" class="btn btn--primary btn--disabled" disabled="" type="submit" ng-click="submitForm()">Submit</button>
+			</form>	 					
+			<px-fourup id="widgetsx4" widget-header="FSG Trend Analysis" widget-icon="fa-bar-chart">
+      <div class=widget-1>
+        <highchart class="chart" config="chartConfig1" class="span9"></highchart>
+      </div>
+      <div class=widget-2>
+      <highchart class="chart" config="chartConfig2" class="span9" ></highchart>
+      </div>
+      <div class=widget-3>
+      <highchart class="chart" config="chartConfig3" class="span9" ></highchart>
+      </div>
+      <div class=widget-4>
+        <highchart class="chart" config="chartConfig4" class="span9" ></highchart>
+      </div>
+    </px-fourup>
+</px-card> -->
+		  
+		  </div>
+		  <!--<template is="dom-bind">
+	 <iron-ajax url="../bower_components/px-data-table/demandtrend.json" last-response="{{demandtrenddata}}" auto></iron-ajax>   -->	  
+<div id="dashboard" ng-hide = "overview" style="margin-top:-20px;">
+<button class="btn btn--tertiary btn--icon float--right" style="margin-top:10px; margin-right:10px;" type="button" 
+title="Back to Summary" ng-click="summaryCall()"><i class="fa fa-times-circle"></i></button>
+
+<px-card header-text="{{selected_date}} | Demand and Supply trend Detailed Table">
+ <img class="float--right" style="margin-top:-70px; margin-right:30px;" src="../images/excel.png" id="inventoryImageDemandtrenddata" alt="Excel Download" title="Export to Excel"></a>	
+<px-data-table id="dsTrendDrill" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{demandtrenddata}}">
+        <px-data-table-column
+          name="material" type="html"
+		  label="Material"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+        <px-data-table-column
+          name="materialDesc" type="html"
+		  label="Material Description"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<!--<px-data-table-column
+          name="month" type="html"
+		  label="Month"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="date" type="html"
+		  label="Date"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column> -->
+		<px-data-table-column
+          name="inventory" type="html"
+		  label="Inventory"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="demand" type="html"
+		  label="Demand"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="inTransit" type="html"
+		  label="In-Transit"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="shortage" type="html"
+		  label="Shortage"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>	
+		</px-data-table> 
+	  </px-card>
+	 <!--  <px-fourup id="widgetsx4" widget-header="FSG Trend Analysis" widget-icon="fa-bar-chart">
+      <div class=widget-1>
+        <highchart class="chart" config="chartConfig1" class="span9"></highchart>
+      </div>
+      <div class=widget-2>
+      <highchart class="chart" config="chartConfig2" class="span9" ></highchart>
+      </div>
+      <div class=widget-3>
+      <highchart class="chart" config="chartConfig3" class="span9" ></highchart>
+      </div>
+      <div class=widget-4>
+        <highchart class="chart" config="chartConfig4" class="span9" ></highchart>
+      </div>
+    </px-fourup> -->
+</div>	
+<!--</template>	  -->  
+
+<!-- <template is="dom-bind">
+	  <iron-ajax url="../bower_components/px-data-table/custtrend.json" last-response="{{custtrenddata}}" auto></iron-ajax> -->   	  
+<div id="dashboard" ng-hide = "overview1" style="margin-top:-20px;">
+<button class="btn btn--tertiary btn--icon float--right" style="margin-top:10px; margin-right:10px;" type="button" 
+title="Back to Summary" ng-click="summaryCall1()"><i class="fa fa-times-circle"></i></button>
+
+<px-card header-text="Customer Consumption Trend Detailed Table">
+  <img class="float--right" style="margin-top:-70px; margin-right:30px;" src="../images/excel.png"  id="inventoryImageCustConsTrendData" alt="Excel Download" title="Export to Excel"></a>	
+<px-data-table id="mytable" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{custConsTrendData}}">
+        <px-data-table-column
+          name="material" type="html"
+		  label="Material"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+        <px-data-table-column
+          name="materialDesc" type="html"
+		  label="Material Description"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<!-- <px-data-table-column
+          name="month" type="html"
+		  label="Month"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column> -->
+		<px-data-table-column
+          name="date" type="html"
+		  label="Date"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="custConsumptions" type="html"
+		  label="Customer Consumption"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="custReturns" type="html"
+		  label="Customer Returns"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>		
+		</px-data-table> 
+	  </px-card>	 
+</div>	
+<!-- </template>	 -->
+
+<!-- <template is="dom-bind">
+	  <iron-ajax url="../bower_components/px-data-table/fstrend.json" last-response="{{fstrend}}" auto></iron-ajax> -->   	  
+<div id="dashboard" ng-hide = "overview2" style="margin-top:-20px;">
+<button class="btn btn--tertiary btn--icon float--right" style="margin-top:10px; margin-right:10px;" type="button" 
+title="Back to Summary" ng-click="summaryCall2()"><i class="fa fa-times-circle"></i></button>
+
+<px-card header-text="FSG Operational Trend Detailed Table">
+  <img class="float--right" style="margin-top:-70px; margin-right:30px;" src="../images/excel.png"  id="inventoryImageFsgDrilldownData" alt="Excel Download" title="Export to Excel"></a>	
+<px-data-table id="mytable_fsg" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{fsgDrilldownData}}">
+        <px-data-table-column
+          name="material" type="html"
+		  label="Material"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+        <px-data-table-column
+          name="materialDescription" type="html"
+		  label="Material Description"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<!-- <px-data-table-column
+          name="month" type="html"
+		  label="Month"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column> -->
+		<px-data-table-column
+          name="date" type="html"
+		  label="Date"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="fsgReceivedquantity" type="html"
+		  label="FSG Received"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="fsgIssuedquantity" type="html"
+		  label="FSG Issued"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>		
+		</px-data-table> 
+		
+<!-- <px-twoup id="widgetsx2" widget-header="FSG Trend Analysis" widget-icon="fa-bar-chart">
+      <!-- <div class=widget-1>
+        <highchart class="chart" config="chartConfig1" class="span9"></highchart>
+      </div>
+      <div class=widget-2>
+      <highchart class="chart" config="chartConfig2" class="span9" ></highchart>
+      </div> -->
+     <!--  <div class=widget-1>
+      <highchart class="chart" config="chartConfig123" class="span9" ></highchart>
+      </div>
+      <div class=widget-2>
+        <highchart class="chart" config="chartConfig312" class="span9" ></highchart>
+      </div>
+    </px-twoup> --> 		
+	  </px-card>	 
+</div>	
+<!-- </template>	 -->
+
+<!--<template is="dom-bind">
+	  <iron-ajax url="../bower_components/px-data-table/materialdata.json" last-response="{{materialdata}}" auto></iron-ajax>   	  
+<div id="dashboard" ng-hide = "overview7" style="margin-top:-20px;">
+<button class="btn btn--tertiary btn--icon float--right" style="margin-top:10px; margin-right:10px;" type="button" 
+title="Back to Summary" ng-click="summaryCall7()"><i class="fa fa-times-circle"></i></button>
+
+<px-card header-text="FSG Safety Stock Summary">
+ <a href="export"><img class="float--right" style="margin-top:-70px; margin-right:30px;" src="../images/excel.png"  alt="Excel Download" title="Export to Excel"></a>	
+<px-data-table id="mytable" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{materialdata}}">
+        <px-data-table-column
+          name="fsg" type="html"
+		  label="FSG Name"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+        <px-data-table-column
+          name="material" type="html"
+		  label="Material Number"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		 <px-data-table-column
+          name="materialdesc" type="html"
+		  label="Material Description"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="stock" type="html"
+		  label="Material Safety Stock"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="shortage" type="html"
+		  label="Material Safety Stock Shortage"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>				
+		</px-data-table> 
+	  </px-card>	 
+</div>	
+</template>	-->
+
+<!--
+<template is="dom-bind">
+	  <iron-ajax url="../bower_components/px-data-table/movementdata.json" last-response="{{movementdata}}" auto></iron-ajax>   	  
+<div id="dashboard" ng-hide = "overview9" style="margin-top:-20px;">
+<button class="btn btn--tertiary btn--icon float--right" style="margin-top:10px; margin-right:10px;" type="button" 
+title="Back to Summary" ng-click="summaryCall9()"><i class="fa fa-times-circle"></i></button>
+
+<px-card header-text="FSG Material Movement Summary">
+ <a href="export"><img class="float--right" style="margin-top:-70px; margin-right:30px;" src="../images/excel.png" alt="Excel Download" title="Export to Excel"></a>	
+<px-data-table id="mytable" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{movementdata}}">
+		<px-data-table-column
+          name="fsg" type="html"
+		  label="FSG Name"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+        <px-data-table-column
+          name="material" type="html"
+		  label="Material"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+        <px-data-table-column
+          name="materialdesc" type="html"
+		  label="Material Description"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="quantity" type="html"
+		  label="Material Served Quantity"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="code" type="html"
+		  label="Customer ID"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>			
+		</px-data-table> 
+	  </px-card>	 
+</div>	
+</template>	-->
+</div>
+<div ng-hide="!InvalidUser">
+<h1>You are not Authorized to view this page</h1>
+</div>
+<script>
+  function gotoLink(evt,material){		  
+		  
+            var myEl = angular.element( document.querySelectorAll( '.modal' )[0] ); 
+            var myEl2 =   angular.element(document.getElementById('mytable')).scope();
+            myEl.attr('id',"myModal1");
+            console.log("Customer scope------",myEl2);
+            myEl2.custConsumption(material);
+      
+         $("#myModal1").css("visibility","visible");
+		  $("#myModal1").show();           
+          }
+    
+    
+		  function editcancelForm(evt){		  
+		  $("#myModal1").css("visibility","hidden");	  
+          }
+		  function editcancelForm1(evt){		  
+		  $("#myModal5").css("visibility","hidden");	  
+          }
+		  function editcancelForm2(evt){		  
+		  $("#myModal7").css("visibility","hidden");	  
+          }	 
+		  
+		  function gotoLink1(evt,material){		  
+		   var myEl = angular.element( document.querySelectorAll( '.modal' )[1] );
+              var myEl2 =   angular.element(document.getElementById('mytable')).scope();
+			myEl.attr('id',"myModal5");
+			$("#myModal5").css("visibility","visible");
+              myEl2.customerReturns(material);
+              
+              $("#myModal5").css("visibility","visible");
+		  $("#myModal5").show();           
+          }
+   
+		 function gotofsgReceivedLink( evt, material){
+            var myEl = angular.element( document.querySelectorAll( '.modal' )[2] );  
+             var myEl2 =   angular.element(document.getElementById('mytable_fsg')).scope();
+			myEl.attr('id',"myModal711");
+            console.log("Sccopreeee",myEl2);
+            myEl2.myReceived(material);
+            $("#myModal711").css("visibility","visible");
+		  $("#myModal711").show();         
+          }
+        function editcancelfsgReceivedForm(evt){		  
+		  $("#myModal711").css("visibility","hidden");	  
+          }
+		  function gotofsgIssuedLink(evt, material){	
+		  var myEl = angular.element( document.querySelectorAll( '.modal' )[3] );
+			myEl.attr('id',"myModal722");
+               var myEl2 =   angular.element(document.getElementById('mytable_fsg')).scope();
+			//myEl.attr('id',"myModal711");
+               
+            myEl2.myIssued(material);
+			$("#myModal722").css("visibility","visible");
+		  $("#myModal722").show();   
+          }
+		   
+		  function editcancelfsgIssuedForm1(evt){		  
+		  $("#myModal722").css("visibility","hidden");
+		  }
+		 
+		 
+		<!--  FSG Demand-Supply -->
+		
+		 function dsInventoryLink(evt){		 
+		   var myEl = angular.element( document.querySelectorAll( '.modal' )[4] );
+			myEl.attr('id',"myModal8");
+		  $("#myModal8").css("visibility","visible");
+		  $("#myModal8").show();            
+          }
+		  function editcancelForm8(evt){		  
+		  $("#myModal8").css("visibility","hidden");	  
+          }	
+		  
+function dsInTransitLink(evt){		 
+		   var myEl = angular.element( document.querySelectorAll( '.modal' )[5] );
+			myEl.attr('id',"myModal87");
+		  $("#myModal87").css("visibility","visible");
+		  $("#myModal87").show();            
+          }
+		  function editcancelForm3(evt){		  
+		  $("#myModal87").css("visibility","hidden");	  
+          }	
+		  
+function dsDemandLink(evt){		 
+		   var myEl = angular.element( document.querySelectorAll( '.modal' )[6] );
+			myEl.attr('id',"myModal9");
+		  $("#myModal9").css("visibility","visible");
+		  $("#myModal9").show();            
+          }
+		  function editcancelForm4(evt){		  
+		  $("#myModal9").css("visibility","hidden");	  
+          }	
+		  
+function dsShortageLink(evt){		 
+		   var myEl = angular.element( document.querySelectorAll( '.modal' )[7] );
+			myEl.attr('id',"myModal10");
+		  $("#myModal10").css("visibility","visible");
+		  $("#myModal10").show();            
+          }
+		  function editcancelForm5(evt){		  
+		  $("#myModal10").css("visibility","hidden");	  
+          }	
+		  </script>

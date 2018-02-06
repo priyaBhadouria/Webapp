@@ -1,0 +1,37 @@
+<px-card header-text="Installation Data">
+<div id="valid-alert" class="validMessage">
+<px-alert-message
+                type="warning"
+                message-title="Request has been created!"
+                message="Request ID:357954476"
+                action="dismiss">
+            </px-alert-message>
+
+
+</div>
+<form id="graph" class="form" name="loginForm" data-ng-submit="submitForm(loginForm.$valid)" novalidate>
+
+<button id="installButton" class="btn btn--primary btn--disabled float--right" disabled="" ng-click="installForm()" type="submit" ><i class="fa fa-upload u-mr--"></i> Process</button>
+    <div class="form-group" >
+	<textarea id="txtInstall" name="textarea" ng-change="changeFunction()" focus-me="true" ng-model="myModel" ng-trim="false"></textarea>
+		       
+    </div>
+</form>
+</px-card>
+<div id="installation-data" class="install">
+<px-card header-text="Processed Data">
+<button id="" class="btn btn--primary float--right" type="submit" ng-click="submitForm()">Submit</button>
+
+
+	 <table id="TextBoxesGroup" class="table table--fixed u-mb++">
+        <tr>
+          <th>Serial Number</th>
+          <th>Location Tag</th>
+          <th>Validation</th>          
+        </tr>
+			
+
+ 
+</px-card>
+	 </div>
+	

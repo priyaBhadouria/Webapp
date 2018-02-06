@@ -1,0 +1,491 @@
+<input type="text" ng-model="overview" ng-focus="hideShowFun()" id="testing1" style="opacity:0;height:0px;">
+<div id="summary" ng-hide = "summary" style="margin-top: -20px;">
+	 <div class="layout layout--right style-scope rmd-ref-app-summary-card">
+			
+				<div class="layout__item u-1/6 summary-box style-scope rmd-ref-app-summary-card" style="width: 23% !important;">
+					<h4 class="summary-label caps style-scope rmd-ref-app-summary-card" style="font-size:16px;">Total Customer Sites</h4>
+					<div class="style-scope rmd-ref-app-summary-card">
+						<span class="summary-value style-scope rmd-ref-app-summary-card">{{headerData.totalSitesInstalled}}</span>
+						<span class="summary-uom style-scope rmd-ref-app-summary-card">Sites</span>
+					</div>
+				</div>
+			
+				<div class="layout__item u-1/6 summary-box style-scope rmd-ref-app-summary-card" style="width: 23% !important;">
+					<h4 class="summary-label caps style-scope rmd-ref-app-summary-card" style="font-size:16px;">Customer Consumption</h4>
+					<div class="style-scope rmd-ref-app-summary-card">
+						<span class="summary-value style-scope rmd-ref-app-summary-card">{{headerData.assetsInstalled}}</span>
+						<span class="summary-uom style-scope rmd-ref-app-summary-card">Units</span>
+					</div>
+				</div>
+			
+				<div class="layout__item u-1/6 summary-box style-scope rmd-ref-app-summary-card" style="width: 23% !important;">
+					<h4 class="summary-label caps style-scope rmd-ref-app-summary-card" style="font-size:16px;">Customer Returned</h4>
+					<div class="style-scope rmd-ref-app-summary-card">
+						<span class="summary-value style-scope rmd-ref-app-summary-card">{{headerData.asserReturned}}</span>
+						<span class="summary-uom style-scope rmd-ref-app-summary-card">Units</span>
+					</div>
+				</div>
+				
+				<div class="layout__item u-1/6 summary-box style-scope rmd-ref-app-summary-card" style="width: 23% !important;">
+					<h4 class="summary-label caps style-scope rmd-ref-app-summary-card" style="font-size:16px;">Customer Demand</h4>
+					<div class="style-scope rmd-ref-app-summary-card">
+						<span class="summary-value style-scope rmd-ref-app-summary-card">1000</span>
+						<span class="summary-uom style-scope rmd-ref-app-summary-card">Units</span>
+					</div>
+				</div>
+						
+			
+		  </div>
+		  <px-card header-text="Customer Consumption Overview">
+		   <highchart id="chart11" config="chartConfig11" class="span12"></highchart>
+		   </px-card>
+		  <!--<px-twoup id="widgetsx2" widget-header="Customer Consumption Reports" widget-icon="fa-bar-chart">
+	
+       <div class=widget-1>
+       
+      </div>
+      <div class=widget-2>	
+       <highchart id="chart9" config="chartConfig9" class="span12"></highchart> 
+      </div> 	  
+    </px-twoup>-->
+	
+	
+	
+	
+	  <div id="customer-location">
+
+	  <!-- <iron-ajax url="../bower_components/px-data-table/consumption-loc.json" last-response="{{consumptionlocdata}}" auto></iron-ajax>     
+	  <iron-ajax url="../bower_components/px-data-table/installation.json" last-response="{{instalationdata}}" auto></iron-ajax> -->  
+       
+	   <px-card header-text="Customer Consumption Overview">
+	   
+	  <a href="export"><img class="float--right" style="margin-top:-70px;" src="../images/excel.png" alt="Excel Download" title="Export to Excel"></a>
+	  <px-data-table id="custTable" table-data="{{projectDetails}}" filterable striped>
+	  <!-- [{"material":"204114","materialDescription":"JPMC SB-100-12-2BLCK HVL","currentQty":-2,"lastDate":1479513600000,"customerSite":"Chase-JPMC 513509"}]-->
+	
+	<px-data-table-column
+          name="customerSite" type="html"
+		  label="Customer Site"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		
+	<px-data-table-column
+          name="customerDesc" type="html"
+		  label="Customer Description"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+    </px-data-table-column>
+	<px-data-table-column
+          name="material" type="html"
+		  label="Material"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+	<px-data-table-column
+          name="materialDescription" type="html"
+		  label="Material Description"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="currentQty" type="html"
+		  label="Installed Quantity"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="lastDate" type="html"
+		  label="Last Date of Installation"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>		
+      </px-data-table>
+	  </px-card>
+	  </div>
+	  </div>
+<div id="dashboard" ng-hide = "overview" style="margin-top:-17px;">
+<h3 class="summary-label caps style-scope rmd-ref-app-summary-card" style="font-size:24px;">{{custName}}</h3>
+<div class="layout layout--right style-scope rmd-ref-app-summary-card">
+			
+				<div class="layout__item u-1/6 summary-box style-scope rmd-ref-app-summary-card" style="width: 23% !important;">
+					<h4 class="summary-label caps style-scope rmd-ref-app-summary-card" style="font-size:16px;">Installed</h4>
+					<div class="style-scope rmd-ref-app-summary-card">
+						<span class="summary-value style-scope rmd-ref-app-summary-card">{{headerDataPerCustomer.installed}}</span>
+						<span class="summary-uom style-scope rmd-ref-app-summary-card">Units</span>
+					</div>
+				</div>
+			
+				<div class="layout__item u-1/6 summary-box style-scope rmd-ref-app-summary-card" style="width: 23% !important;">
+					<h4 class="summary-label caps style-scope rmd-ref-app-summary-card" style="font-size:16px;">Demand</h4>
+					<div class="style-scope rmd-ref-app-summary-card">
+						<span class="summary-value style-scope rmd-ref-app-summary-card">0</span>
+						<span class="summary-uom style-scope rmd-ref-app-summary-card">Units</span>
+					</div>
+				</div>
+			
+				<div class="layout__item u-1/6 summary-box style-scope rmd-ref-app-summary-card" style="width: 23% !important;">
+					<h4 class="summary-label caps style-scope rmd-ref-app-summary-card" style="font-size:16px;">Return</h4>
+					<div class="style-scope rmd-ref-app-summary-card">
+						<span class="summary-value style-scope rmd-ref-app-summary-card">0</span>
+						<span class="summary-uom style-scope rmd-ref-app-summary-card">Units</span>
+					</div>
+				</div>
+				
+				<div class="layout__item u-1/6 summary-box style-scope rmd-ref-app-summary-card" style="width: 23% !important;">
+					<h4 class="summary-label caps style-scope rmd-ref-app-summary-card" style="font-size:16px;">FSG Served</h4>
+					<div class="style-scope rmd-ref-app-summary-card">
+						<span class="summary-value style-scope rmd-ref-app-summary-card">{{headerDataPerCustomer.fsgServedLocation}}</span>
+						<span class="summary-uom style-scope rmd-ref-app-summary-card">Location</span>
+					</div>
+				</div>
+						
+			
+		  </div>
+	  <button class="btn btn--tertiary btn--icon float--right" style="margin-top:10px; margin-right:10px;" type="button" 
+title="Back to Summary" ng-click="summaryCall()"><i class="fa fa-times-circle"></i></button>
+
+<template is="dom-bind">
+	  <!-- <iron-ajax url="../bower_components/px-data-table/custt-overview-data.json" last-response="{{custtdata}}" auto></iron-ajax>     
+	  <iron-ajax url="../bower_components/px-data-table/supp-overview-data.json" last-response="{{suppdata}}" auto></iron-ajax> -->
+	  <px-twoup id="widgetsx2" widget-header="Walmart - 20416 Detailed Data table" widget-icon="fa-eye">
+	   <div class=widget-1>
+	<px-card header-text="Installed Data">	
+<a href="export"><img class="float--right" style="margin-top:-70px;" src="../images/excel.png" alt="Excel Download" title="Export to Excel"></a>	
+<px-data-table id="mytable1" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{installedData}}">
+        <px-data-table-column
+          name="material" type="html"
+		  label="Material"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+        <px-data-table-column
+          name="materialDescription" type="html"
+		  label="Material Description"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		 <px-data-table-column
+          name="installedCount" type="html"
+		  label="Installed Count"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>			
+      </px-data-table> 
+	  </px-card>
+	  </div>
+	   <div class=widget-2>
+	<px-card header-text="Demand Data">	
+<a href="export"><img class="float--right" style="margin-top:-70px;" src="../images/excel.png" alt="Excel Download" title="Export to Excel"></a>	
+<px-data-table id="mytable2" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{demandData}}">
+       <px-data-table-column
+          name="material" type="html"
+		  label="Material"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		 <px-data-table-column
+          name="materialDescription" type="html"
+		  label="Material Description"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<!-- <px-data-table-column
+          name="quantity" type="html"
+		  label="Required Quantity"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column> -->
+		<px-data-table-column
+          name="project" type="html"
+		  label="Project"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="demandDate" type="html"
+		  label="Demand Date"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+				
+      </px-data-table> 
+	  </px-card>
+	  </div>
+	   </px-twoup>
+	</template>
+	
+	
+
+<template is="dom-bind">
+	  <iron-ajax url="../bower_components/px-data-table/performance-overview-data.json" last-response="{{performdata}}" auto></iron-ajax>     
+	  
+	  
+	   
+	<px-card header-text="FSG Performance Summary">	
+<a href="export"><img class="float--right" style="margin-top:-70px;" src="../images/excel.png" alt="Excel Download" title="Export to Excel"></a>	
+<px-data-table id="mytable" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{performdata}}">
+        <px-data-table-column
+          name="code" type="html"
+		  label="FSG Code"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+        <px-data-table-column
+          name="fsgname" type="html"
+		  label="FSG Name"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		 			
+     
+	 
+       <px-data-table-column
+          name="material" type="html"
+		  label="Material"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="materialdesc" type="html"
+		  label="Material Description"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		 <px-data-table-column
+          name="asset" type="html"
+		  label="Asset Supplied"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="demand" type="html"
+		  label="New Demand"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="returned" type="html"
+		  label="Returned"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+				
+      </px-data-table> 
+	  </px-card>
+	 
+	</template>	
+	
+	
+	
+<!-- 
+<template is="dom-bind">
+	  <iron-ajax url="../bower_components/px-data-table/customer-overview-data.json" last-response="{{custdata}}" auto></iron-ajax>     
+	  <iron-ajax url="../bower_components/px-data-table/supplier-overview-data.json" last-response="{{supplierdata}}" auto></iron-ajax>     
+	  <px-twoup id="widgetsx2" widget-header="Customer/Supplier Overview" widget-icon="fa-bar-chart">
+         <div class=widget-1>
+	   <px-card header-text="Customer Drilldown Data">
+	  
+<px-data-table id="mytable" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{custdata}}">
+        <px-data-table-column
+          name="stoid" type="html"
+		  label="STO ID"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+        <px-data-table-column
+          name="sku" type="html"
+		  label="SKU"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="sshipped" type="html"
+		  label="Shipped Date"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>		
+        						
+      </px-data-table> 
+	  </px-card>
+	  </div>
+	   
+	    <div class=widget-2>
+	   <px-card header-text="Supplier Drilldown Data">	  
+<px-data-table id="mytable" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{supplierdata}}">
+        <px-data-table-column
+          name="stoid" type="html"
+		  label="STO ID"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+        <px-data-table-column
+          name="sku" type="html"
+		  label="SKU"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="sshipped" type="html"
+		  label="Shipped Date"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>      						
+      </px-data-table> 
+	  </px-card>
+	  </div>
+</px-twoup>	
+</template> -->
+	
+</div>
+<!-- <px-card header-text="Select Plant">
+<form id="myForm>
+ <label class="label--inline"><font class="u-mr+">Plants:</font></label>
+<select style="width:235px;" id="branch" ng-model="branch" ng-options="" required class="u-mr+">
+						<option value="" >Select</option>
+						<option value="1PS1" >1PS1</option>
+						<option value="1PS2" >1PS2</option>
+						<option value="1PS3" >1PS3</option>
+				    </select> 
+ 			  <button id="booxx" class="btn btn--primary" type="submit" ng-click="submitForm()">Submit</button>
+			</form>
+</px-card> -->
+
+<div id="dashboard" ng-hide = "overview">
+  
+<!-- <px-twoup id="widgetsx2" widget-header="Customer/Supplier Overview" widget-icon="fa-bar-chart">
+
+	 
+      <div class=widget-1>
+       <highchart id="chart9" config="chartConfig9" class="span12"></highchart> 
+      </div>
+      <div class=widget-2>	
+       <highchart id="chart11" config="chartConfig11" class="span12"></highchart>
+      </div>
+    </px-twoup> -->  
+<!-- <div class="layout layout--right style-scope rmd-ref-app-summary-card">
+        
+	        <div class="layout__item u-1/6 summary-box style-scope rmd-ref-app-summary-card">
+				<h4 class="summary-label caps style-scope rmd-ref-app-summary-card">Plants/Branch</h4>
+				<div class="style-scope rmd-ref-app-summary-card">
+					<span class="summary-value style-scope rmd-ref-app-summary-card">2000</span>
+					<span class="summary-uom style-scope rmd-ref-app-summary-card"></span>
+				</div>
+	        </div>
+        
+	        <div class="layout__item u-1/6 summary-box style-scope rmd-ref-app-summary-card">
+				<h4 class="summary-label caps style-scope rmd-ref-app-summary-card">In Transit</h4>
+				<div class="style-scope rmd-ref-app-summary-card">
+					<span class="summary-value style-scope rmd-ref-app-summary-card">500</span>
+					<span class="summary-uom style-scope rmd-ref-app-summary-card"></span>
+				</div>
+	        </div>
+        
+	        <div class="layout__item u-1/6 summary-box style-scope rmd-ref-app-summary-card">
+				<h4 class="summary-label caps style-scope rmd-ref-app-summary-card">Issued to FSG</h4>
+				<div class="style-scope rmd-ref-app-summary-card">
+					<span class="summary-value style-scope rmd-ref-app-summary-card">1500</span>
+					<span class="summary-uom style-scope rmd-ref-app-summary-card"></span>
+				</div>
+	        </div>
+        	        
+        <template is="dom-repeat" class="style-scope rmd-ref-app-summary-card"></template>
+        <div class="layout__item u-1/4 summary-box style-scope rmd-ref-app-summary-card" style="width: 28% !important;">
+        	<div style="float: left;" class="style-scope rmd-ref-app-summary-card">
+				<h4 class="summary-label caps style-scope rmd-ref-app-summary-card">Consumed by Customer</h4>
+				<div class="style-scope rmd-ref-app-summary-card">
+					<span class="summary-value style-scope rmd-ref-app-summary-card">1500</span>
+					
+					<!-- 	<span class="summary-uom style-scope rmd-ref-app-summary-card">%</span> 
+					<template is="dom-if" class="style-scope rmd-ref-app-summary-card"></template>
+				</div>
+        	</div>
+        	<div class="summary-meter style-scope rmd-ref-app-summary-card">
+			<ref-digital-meter percentage="85.3"></ref-digital-meter> 
+       		
+        	</div>
+        </div>
+      </div> -->
+
+<!--  <px-fourup id="widgetsx4" widget-header="Inventory Reports" widget-icon="fa-th">
+    <div class=widget-1>	
+	<highchart id="chart5" config="chartConfig55" class="span12"></highchart>  
+      </div>
+      <div class=widget-2>
+	   <highchart id="chart17" config="chartConfig75" class="span12"></highchart> 
+      </div>
+    <div class=widget-3>	
+	<highchart id="chart5" config="chartConfig105" class="span12"></highchart>	
+	<!-- <highchart id="chart5" config="chartConfig7" class="span12"></highchart>   
+      </div>
+      <div class=widget-4>
+	   <highchart id="chart17" config="chartConfig85" class="span12"></highchart> 
+      </div>
+    </px-fourup>
+	 -->
+	<!-- <div style="border-top: 1px solid #7c7c84; padding-top:10px; margin-top:0px;">
+	 <px-twoup id="widgetsx2" widget-header="" widget-icon="fa-eye">
+	 
+      <div class=widget-1>
+        <highchart id="chart15" config="chartConfig12" class="span12"></highchart>
+      </div>
+      <div class=widget-2>
+      <highchart id="chart5" config="chartConfig105" class="span12"></highchart>
+      </div> 
+  </px-twoup>
+	</div> -->
+	
+<!-- <px-card header-text="Time Series Data">
+
+  <px-chart tooltip-type="condensed" series-events-width="1">
+    <px-chart-controls data-controls show-date-range="true" display-options='{ "displayType": "normal","submitButtonText": "Update", "submitButtonIcon": "icon-arrow-right" }'></px-chart-controls>
+    <px-chart-yaxis title='{"text": "Left Axis"}' id="firstAxis" offset="0"></px-chart-yaxis>
+    <px-chart-yaxis title='{"text": "Right Axis"}' id="anotherAxis" opposite="true" offset="-2.5"></px-chart-yaxis>
+    <px-chart-series-line id="Installed" axis-id="firstAxis" upper-threshold="30.5" lower-threshold="6.25">
+      <iron-ajax
+        url="../bower_components/px-chart/delta-egt-cruise.json"
+        handle-as="json" auto></iron-ajax>
+    </px-chart-series-line>
+    <px-chart-series-line id="Service" axis-id="anotherAxis">
+      <iron-ajax
+        url="../bower_components/px-chart/fan-vibration-cruise.json"
+        handle-as="json" auto></iron-ajax>
+    </px-chart-series-line>
+  </px-chart>
+</px-card> -->
+
+</div>
+
+
+<script>
+ function drilldown(evt){			
+			$('#testing1').focus();            	 	
+          }
+</script>

@@ -1,0 +1,183 @@
+
+ <!-- <div class="layout layout--right style-scope rmd-ref-app-summary-card">
+        
+	        <div class="layout__item u-1/6 summary-box style-scope rmd-ref-app-summary-card">
+				<h4 class="summary-label caps style-scope rmd-ref-app-summary-card">GE Shipment</h4>
+				<div class="style-scope rmd-ref-app-summary-card">
+					<span class="summary-value style-scope rmd-ref-app-summary-card">3000</span>
+					<span class="summary-uom style-scope rmd-ref-app-summary-card">Units</span>
+				</div>
+	        </div>
+        
+	        <div class="layout__item u-1/6 summary-box style-scope rmd-ref-app-summary-card">
+				<h4 class="summary-label caps style-scope rmd-ref-app-summary-card">In Transit to FSG</h4>
+				<div class="style-scope rmd-ref-app-summary-card">
+					<span class="summary-value style-scope rmd-ref-app-summary-card">500</span>
+					<span class="summary-uom style-scope rmd-ref-app-summary-card">Units</span>
+				</div>
+	        </div>
+        
+	        <div class="layout__item u-1/6 summary-box style-scope rmd-ref-app-summary-card">
+				<h4 class="summary-label caps style-scope rmd-ref-app-summary-card">Received in FSG</h4>
+				<div class="style-scope rmd-ref-app-summary-card">
+					<span class="summary-value style-scope rmd-ref-app-summary-card">2000</span>
+					<span class="summary-uom style-scope rmd-ref-app-summary-card">Units</span>
+				</div>
+	        </div>
+        	        
+        <template is="dom-repeat" class="style-scope rmd-ref-app-summary-card"></template>
+        <div class="layout__item u-1/4 summary-box style-scope rmd-ref-app-summary-card" style="width: 28% !important;">
+        	<div style="float: left;" class="style-scope rmd-ref-app-summary-card">
+				<h4 class="summary-label caps style-scope rmd-ref-app-summary-card">In transit to Customer</h4>
+				<div class="style-scope rmd-ref-app-summary-card">
+					<span class="summary-value style-scope rmd-ref-app-summary-card">500</span>
+					
+					<span class="summary-uom style-scope rmd-ref-app-summary-card">Units</span> 
+					<template is="dom-if" class="style-scope rmd-ref-app-summary-card"></template>
+				</div>
+        	</div>
+        	 <div class="summary-meter style-scope rmd-ref-app-summary-card">
+			<ref-digital-meter percentage="85.3"></ref-digital-meter> 
+       		
+        	</div> 
+        </div>
+      </div> -->
+<!-- 
+<img src="../images/flow1.png" alt="Inventory Flow">
+
+<template is="dom-bind">
+	  <iron-ajax url="../bower_components/px-data-table/dashboard.json" last-response="{{dashboarddata}}" auto></iron-ajax>     
+	  <iron-ajax url="../bower_components/px-data-table/installation.json" last-response="{{instalationdata}}" auto></iron-ajax>     
+       
+	   <px-card header-text="Inventory Transaction Details">
+	  
+<px-data-table id="mytable" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{dashboarddata}}">
+        <px-data-table-column
+          name="plant" type="html"
+		  label="Plant"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+        <px-data-table-column
+          name="Quantity" type="html"
+		  label="Quantity"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>							
+      </px-data-table> 
+	  </px-card>
+	   
+      
+	  </template> -->
+ 
+<!-- <px-twoup id="widgetsx2" widget-header="Plants Inventory Overview" widget-icon="fa-bar-chart">
+
+	 
+      <div class=widget-1>
+	   <highchart id="chart9" config="chartConfig377" class="span12"></highchart> 
+      <highchart id="chart9" config="chartConfig7" class="span12"></highchart> 
+      </div>
+      <div class=widget-2>
+	
+      </div>
+    </px-twoup> --> 
+<!--  <px-card>
+  <br><br>
+  
+  <div id="hoverDivBottom" class="hover-tooltip">Hover for tooltip<br/><span>(HTML element, bottom, default delay: 1 sec)</span></div>
+            <px-tooltip for="hoverDivBottom" orientation="bottom">
+                <b>Walmart</b><br>Existing - <b>0</b><br>In transit to FSG - <b>0</b><br>Received at FSG - <b>0</b><br>In transit to Customer - <b>100</b><br>Total - <b>0</b>
+            </px-tooltip>
+            <p></p>
+			 <div id="hoverDivBottom" class="hover-tooltip">Hover for tooltip<br/><span>(HTML element, bottom, default delay: 1 sec)</span></div>
+            <px-tooltip for="hoverDivBottom" orientation="bottom">
+                Bottom tooltip<br>with html<br><div class='test-el'>HTML Div</div>
+            </px-tooltip>
+            <p></p>
+			 <div id="hoverDivBottom" class="hover-tooltip">Hover for tooltip<br/><span>(HTML element, bottom, default delay: 1 sec)</span></div>
+            <px-tooltip for="hoverDivBottom" orientation="bottom">
+                Bottom tooltip<br>with html<br><div class='test-el'>HTML Div</div>
+            </px-tooltip>
+            <p></p>
+  <div id="hoverDivBottom" class="hover-tooltip">Hover for tooltip<br/><span>(top, 5 sec delay)</span></div>
+            <px-tooltip
+                for="hoverDivBottom"
+                orientation="bottom">
+                <b>Walmart</b><br>Existing - <b>0</b><br>In transit to FSG - <b>0</b><br>Received at FSG - <b>0</b><br>In transit to Customer - <b>100</b><br>Total - <b>0</b>
+            </px-tooltip>
+            <p></p>
+			<br><br>
+			
+  </px-card>  -->
+<px-card header-text="Select Plant">
+<form id="myForm>
+ <label class="label--inline"><font class="u-mr+">Plants:</font></label>
+<select style="width:235px;" id="branch" ng-model="branch" ng-options="" required class="u-mr+">
+						<option value="Select" >Select</option>
+						<option value="" >1PS1</option>
+						<option value="1PS2" >1PS2</option>
+						<option value="1PS3" >1PS3</option>
+				    </select> 
+ 			  <button id="booxx" class="btn btn--primary" type="submit" ng-click="submitForm()">Submit</button>
+			</form>
+</px-card>
+<img src="../images/dummy1.png" alt=""> 
+ <!-- <px-card ng-hide = "" style="height:900px;">
+<highchart id="chart111" config="chartConfig5" class="span12 jai"></highchart>
+</px-card> -->
+<!-- 
+<template is="dom-bind">
+	  <iron-ajax url="../bower_components/px-data-table/tree.json" last-response="{{treedata}}" auto></iron-ajax>     
+	  <iron-ajax url="../bower_components/px-data-table/installation.json" last-response="{{instalationdata}}" auto></iron-ajax>     
+       
+	   <px-card header-text="Inventory Customer Level Details">	  
+<px-data-table id="mytable" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{treedata}}">
+        <px-data-table-column
+          name="stoid" type="html"
+		  label="STO ID"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="stoitem" type="html"
+		  label="STO Item"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="material" type="html"
+		  label="Material"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+        <px-data-table-column
+          name="materialDescription" type="html"
+		  label="Material Description"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+				
+      </px-data-table> 
+	  </px-card>
+	   
+      
+	  </template>  -->
+<!--  
+<px-twoup id="widgetsx2" widget-header="Customer Overview" widget-icon="fa-bar-chart">
+
+	 
+      <div class=widget-1>
+       <highchart id="chart9" config="chartConfig9" class="span12"></highchart> 
+      </div>
+      <div class=widget-2>	
+       <highchart id="chart11" config="chartConfig11" class="span12"></highchart>
+      </div>
+    </px-twoup>  -->
+
+

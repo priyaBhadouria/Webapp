@@ -1,0 +1,851 @@
+<style>
+.btn.btn--tertiary.btn--icon
+ {
+    color: #ff9821 !important; }
+</style>
+<div ng-hide="!validUser">
+<px-card header-text="Select View">
+
+		<div class="container-tabs">
+		<label id="tab1" class="label--inline tab selected" for="basic-form-checkbox" ng-click="tabview()">
+		FSG DEMAND AND SUPPLY REPORTS</label>
+		<label id="tab2" class="label--inline tab" for="basic-form-checkbox1" ng-click="tabview1()">CUSTOMER CONSUMPTION OVERVIEW</label>
+		<label id="tab3" class="label--inline tab" for="basic-form-checkbox2" ng-click="tabview2()">IN-ACTIVE STOCK REPORTS</label>
+		</div>
+
+</px-card> 
+<input type="text" ng-model="overview" ng-focus="hideShowFun()" id="testing1" style="opacity:0;height:0px;">
+<input type="text" ng-model="overview" ng-focus="hideShowFun1()" id="testing2" style="opacity:0;height:0px;">
+<div ng-hide="fsgsection">
+<div id="summary" ng-hide ="" style="margin-top: -20px;">
+<div id="fsgaggregationtop" ng-hide="fsgaggregationtop">
+	 <div class="layout layout--right style-scope rmd-ref-app-summary-card">
+			
+				<div class="layout__item u-1/6 summary-box style-scope rmd-ref-app-summary-card" style="width: 22% !important;">
+					<h4 class="summary-label caps style-scope rmd-ref-app-summary-card" style="font-size:13px;">FSG NET Inventory</h4>
+					<div class="style-scope rmd-ref-app-summary-card units">
+						<span class="summary-value style-scope rmd-ref-app-summary-card">{{headerData.allInventory}}</span>
+						
+					</div>
+					<div class="style-scope rmd-ref-app-summary-card dollar">
+						<span class="summary-value style-scope rmd-ref-app-summary-card">${{atfsg_$_value}}</span>
+						
+					</div>
+				</div>
+						  	
+				<div class="layout__item u-1/6 summary-box style-scope rmd-ref-app-summary-card" style="width: 22% !important;">
+					<h4 class="summary-label caps style-scope rmd-ref-app-summary-card" style="font-size:13px;">In Transit to FSG</h4>
+					<div class="style-scope rmd-ref-app-summary-card units">
+						<span class="summary-value style-scope rmd-ref-app-summary-card">{{headerData.allTransit}}</span>
+						
+					</div>
+					<div class="style-scope rmd-ref-app-summary-card dollar">
+						<span class="summary-value style-scope rmd-ref-app-summary-card">${{transittofsg_$_value}}</span>
+						
+					</div>
+				</div>
+				
+				<div class="layout__item u-1/6 summary-box style-scope rmd-ref-app-summary-card" style="width: 22% !important;">
+					<h4 class="summary-label caps style-scope rmd-ref-app-summary-card" style="font-size:13px;">FSG Demand</h4>
+					<div class="style-scope rmd-ref-app-summary-card units">
+						<span class="summary-value style-scope rmd-ref-app-summary-card">{{headerData.allDemand}}</span>
+						
+					</div>
+					<div class="style-scope rmd-ref-app-summary-card dollar">
+						<span class="summary-value style-scope rmd-ref-app-summary-card">${{fsg_demand_$_value}}</span>
+						
+					</div>
+				</div>
+							
+				<div class="layout__item u-1/6 summary-box style-scope rmd-ref-app-summary-card" style="width: 22% !important;">
+					<h4 class="summary-label caps style-scope rmd-ref-app-summary-card" style="font-size:13px;">FSG Shortage</h4>
+					<div class="style-scope rmd-ref-app-summary-card units">
+						<span class="summary-value style-scope rmd-ref-app-summary-card">{{headerData.allShortage}}</span>
+						
+					</div>
+					<div class="style-scope rmd-ref-app-summary-card dollar">
+						<span class="summary-value style-scope rmd-ref-app-summary-card">${{fsg_shortage_$_value}}</span>
+						
+					</div>
+				</div>
+				<div class="layout__item u-1/6 summary-box style-scope rmd-ref-app-summary-card" style="width: 8% !important;">
+				<button class="btn btn--primary float--right dollars" type="button" title="Click to toggle" onclick="searchForm()" style="border:none !important; margin-top:10px;"><i class="fa fa-toggle-off u-mr--"></i>Units</button>
+					
+				</div>
+						
+			
+		  </div>
+		  </div>
+		  
+		  <div id="fsgaggregationdrill" ng-hide="fsgaggregationdrill">
+			<div class="layout layout--right style-scope rmd-ref-app-summary-card">
+			<!-- Below function requires FSG Name which is selected by user  -->
+				<div class="layout__item u-1/6 summary-box style-scope rmd-ref-app-summary-card" style="width: 23% !important;">
+					<h4 class="summary-label caps style-scope rmd-ref-app-summary-card" style="font-size:13px;">{{projectDetails5}} Inventory</h4>
+					<div class="style-scope rmd-ref-app-summary-card">
+						<span class="summary-value style-scope rmd-ref-app-summary-card">{{fsgInventory}}</span>
+						
+					</div>
+				</div>
+			
+			<!-- Below function requires FSG Name which is selected by user  -->
+				<div class="layout__item u-1/6 summary-box style-scope rmd-ref-app-summary-card" style="width: 23% !important;">
+					<h4 class="summary-label caps style-scope rmd-ref-app-summary-card" style="font-size:13px;">{{projectDetails5}} Demand</h4>
+					<div class="style-scope rmd-ref-app-summary-card">
+						<span class="summary-value style-scope rmd-ref-app-summary-card">{{fsgDemand}}</span>
+						
+					</div>
+				</div>
+			<!-- Below function requires FSG Name which is selected by user  -->
+				<div class="layout__item u-1/6 summary-box style-scope rmd-ref-app-summary-card" style="width: 23% !important;">
+					<h4 class="summary-label caps style-scope rmd-ref-app-summary-card" style="font-size:13px;">In Transit to {{projectDetails5}}</h4>
+					<div class="style-scope rmd-ref-app-summary-card">
+						<span class="summary-value style-scope rmd-ref-app-summary-card">{{inTransitToFSG}}</span>
+						
+					</div>
+				</div>
+				<!-- Below function requires FSG Name which is selected by user  -->
+				<div class="layout__item u-1/6 summary-box style-scope rmd-ref-app-summary-card" style="width: 23% !important;">
+					<h4 class="summary-label caps style-scope rmd-ref-app-summary-card" style="font-size:13px;">{{projectDetails5}} Shortage</h4>
+					<div class="style-scope rmd-ref-app-summary-card">
+						<span class="summary-value style-scope rmd-ref-app-summary-card">{{fsgShortage}}</span>
+						
+					</div>
+				</div>
+						
+			
+		  </div>
+		  </div>
+		  
+<px-card icon="fa-bar-chart" header-text="FSG Demand and Supply Reports">
+<highchart id="chart99" config="chartConfig99" class="span12"></highchart> 
+</px-card>		  
+		
+
+	  </div>
+	  
+
+<!-- <template is="dom-bind">
+	  <iron-ajax url="../bower_components/px-data-table/threedata.json" last-response="{{threedata}}" auto></iron-ajax>     
+	  <iron-ajax url="../bower_components/px-data-table/installation.json" last-response="{{instalationdata}}" auto></iron-ajax>  -->
+        <px-modal id="four" modal-heading="">              
+	   <px-card header-text="Demand Detailed Level Data">
+	   
+	   <button class="btn btn--tertiary btn--icon float--right" style="margin-top:-53px;" 
+title="Back to Summary" onclick="editcancelForm()"><i class="fa fa-times-circle"></i></button>
+	  <img class="float--right" style="margin-top:-70px; margin-right:54px;" src="../images/excel.png" id="inventoryImageId9" alt="Excel Download" title="Export to Excel">
+<px-data-table id="mytable" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{demandData}}">
+        <px-data-table-column
+          name="customerId" type="html"
+		  label="Customer Site"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		 <px-data-table-column
+          name="customerDescription" type="html"
+		  label="Customer Name"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+        <px-data-table-column
+          name="demandQty" type="html"
+		  label="Quantity"
+          filterable
+          sort-function-name="myTableCustomFunctions.demandTable"
+          sortable>
+        </px-data-table-column>			
+      </px-data-table> 
+	  </px-card>
+	   
+      
+	 
+</px-modal> 
+      
+	  
+<template is="dom-bind">
+	  <iron-ajax url="../bower_components/px-data-table/threedata.json" last-response="{{threedata}}" auto></iron-ajax>     
+	  <iron-ajax url="../bower_components/px-data-table/modal-data-fsg.json" last-response="{{modaldata}}" auto></iron-ajax> 
+        <px-modal id="five" modal-heading="">              
+	   <px-card header-text="In-Transit Detailed Level Data">
+	   
+	    <button class="btn btn--tertiary btn--icon float--right" style="margin-top:-53px;" 
+title="Back to Summary" onclick="editcancelForm1()"><i class="fa fa-times-circle"></i></button> 
+	  <a href="export"><img class="float--right" style="margin-top:-70px; margin-right:54px;" src="../images/excel.png" alt="Excel Download" title="Export to Excel"></a>
+<px-data-table id="mytable" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{threedata}}">
+<px-data-table-column
+          name="site" type="html"
+		  label="Customer Site"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		 <px-data-table-column
+          name="name" type="html"
+		  label="Customer Name"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+        <px-data-table-column
+          name="Quantity" type="html"
+		  label="Quantity"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>	        		
+      </px-data-table> 
+	  </px-card>
+	   
+      
+	 
+</px-modal>
+ </template>	  
+	  
+       <px-modal id="seven" modal-heading="">              
+	   <px-card header-text="Shortage Detailed level Data">
+	   
+	  <button class="btn btn--tertiary btn--icon float--right" style="margin-top:-53px;" 
+title="Back to Summary" onclick="editcancelForm2()"><i class="fa fa-times-circle"></i></button>
+	  <img class="float--right" style="margin-top:-70px; margin-right:54px;" src="../images/excel.png" id="inventoryImageId10" alt="Excel Download" title="Export to Excel">
+<px-data-table id="mytable" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{demandData}}">
+        <px-data-table-column
+          name="customerId" type="html"
+		  label="Customer Site"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		 <px-data-table-column
+          name="customerDescription" type="html"
+		  label="Customer Name"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+        <px-data-table-column
+          name="shortage" type="html"
+		  label="Quantity"
+          filterable
+          sort-function-name="myTableCustomFunctions.shortageTable"
+          sortable>
+        </px-data-table-column>							
+      </px-data-table> 
+	  </px-card>
+	   
+      
+	 
+</px-modal>
+	  
+	   
+      
+	
+ 
+	  
+	  
+<div id="dashboard" ng-hide = "overview">
+
+	  <button class="btn btn--tertiary btn--icon float--right" style="margin-top:10px; margin-right:10px;" type="button" 
+title="Back to Summary" ng-click="summaryCall()"><i class="fa fa-times-circle"></i></button>
+
+<px-card header-text="{{projectDetails5}} Inventory/Demand/In-Transit/Shortage Detailed Table">
+ <img class="float--right" style="margin-top:-70px; margin-right:30px;" id="inventoryImageId8" src="../images/excel.png" id="" alt="Excel Download" title="Export to Excel">
+<px-data-table id="fsgtable" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{projectDetails31}}">
+        <px-data-table-column
+          name="material" type="html"
+		  label="Material"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+        <px-data-table-column
+          name="materialdesc" type="html"
+		  label="Material Description"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="intransit" type="html"
+		  label="In-Transit"
+          filterable
+          sortable>
+        </px-data-table-column>
+		<px-data-table-column
+          name="inventory" type="html"
+		  label="Inventory"
+          filterable
+         sortable>
+        </px-data-table-column>
+		<px-data-table-column
+          name="demand" type="html"
+		  label="Demand"
+          filterable
+         sortable>
+        </px-data-table-column>		
+		<px-data-table-column
+          name="shortage" type="html"
+		  label="Shortage"
+          filterable
+          sortable>
+        </px-data-table-column>
+		<px-data-table-column
+          name="weeklybucket" type="html"
+		  label="Week Short(FW)"
+          filterable
+         sortable>
+        </px-data-table-column>
+		<px-data-table-column
+          name="year" type="html"
+		  label="Year"
+          filterable
+           sortable>
+        </px-data-table-column>
+				
+      </px-data-table> 
+	  </px-card>	
+</div>
+</div>
+<div id ="custer" ng-hide="custsection">
+<div id="customertop" ng-hide = "customertop">
+<div id="custaggregationtop" ng-hide="custaggregationtop">
+	 <div class="layout layout--right style-scope rmd-ref-app-summary-card">
+			
+				<div class="layout__item u-1/6 summary-box style-scope rmd-ref-app-summary-card" style="width: 23% !important;">
+					<h4 class="summary-label caps style-scope rmd-ref-app-summary-card" style="font-size:16px;">Total Customer Sites</h4>
+					<div class="style-scope rmd-ref-app-summary-card">
+						<span class="summary-value style-scope rmd-ref-app-summary-card">{{headerData7.totalSitesInstalled}}</span>
+						<span class="summary-uom style-scope rmd-ref-app-summary-card">Sites</span>
+					</div>
+				</div>
+			
+				<div class="layout__item u-1/6 summary-box style-scope rmd-ref-app-summary-card" style="width: 23% !important;">
+					<h4 class="summary-label caps style-scope rmd-ref-app-summary-card" style="font-size:16px;">Customer Consumption</h4>
+					<div class="style-scope rmd-ref-app-summary-card">
+						<span class="summary-value style-scope rmd-ref-app-summary-card">{{headerData7.assetsInstalled}}</span>
+						<span class="summary-uom style-scope rmd-ref-app-summary-card">Units</span>
+					</div>
+				</div>
+			
+				<div class="layout__item u-1/6 summary-box style-scope rmd-ref-app-summary-card" style="width: 23% !important;">
+					<h4 class="summary-label caps style-scope rmd-ref-app-summary-card" style="font-size:16px;">Customer Returned</h4>
+					<div class="style-scope rmd-ref-app-summary-card">
+						<span class="summary-value style-scope rmd-ref-app-summary-card">{{headerData7.assetsReturned}}</span>
+						<span class="summary-uom style-scope rmd-ref-app-summary-card">Units</span>
+					</div>
+				</div>
+				<div class="layout__item u-1/6 summary-box style-scope rmd-ref-app-summary-card" style="width: 23% !important;">
+					<h4 class="summary-label caps style-scope rmd-ref-app-summary-card" style="font-size:16px;">Variance</h4>
+					<div class="style-scope rmd-ref-app-summary-card">
+						<span class="summary-value style-scope rmd-ref-app-summary-card">{{headerData7.totalVariance}}</span>
+						<span class="summary-uom style-scope rmd-ref-app-summary-card">Units</span>
+					</div>
+				</div>
+				
+		  </div>
+		  </div>
+ <div id="custaggregationdrill" ng-hide="custaggregationdrill"> 
+<div class="layout layout--right style-scope rmd-ref-app-summary-card">
+			
+				<div class="layout__item u-1/6 summary-box style-scope rmd-ref-app-summary-card" style="width: 23% !important;">
+					<h4 class="summary-label caps style-scope rmd-ref-app-summary-card" style="font-size:16px;">Total Customer Sites</h4>
+					<div class="style-scope rmd-ref-app-summary-card">
+						<span class="summary-value style-scope rmd-ref-app-summary-card">{{headerData7.totalSitesInstalled}}</span>
+						<span class="summary-uom style-scope rmd-ref-app-summary-card">Sites</span>
+					</div>
+				</div>
+			
+				<div class="layout__item u-1/6 summary-box style-scope rmd-ref-app-summary-card" style="width: 23% !important;">
+					<h4 class="summary-label caps style-scope rmd-ref-app-summary-card" style="font-size:16px;">Customer Consumption</h4>
+					<div class="style-scope rmd-ref-app-summary-card">
+						<span class="summary-value style-scope rmd-ref-app-summary-card">{{headerData7.assetsInstalled}}</span>
+						<span class="summary-uom style-scope rmd-ref-app-summary-card">Units</span>
+					</div>
+				</div>
+			
+				<div class="layout__item u-1/6 summary-box style-scope rmd-ref-app-summary-card" style="width: 23% !important;">
+					<h4 class="summary-label caps style-scope rmd-ref-app-summary-card" style="font-size:16px;">Customer Returned</h4>
+					<div class="style-scope rmd-ref-app-summary-card">
+						<span class="summary-value style-scope rmd-ref-app-summary-card">{{headerData7.assetsReturned}}</span>
+						<span class="summary-uom style-scope rmd-ref-app-summary-card">Units</span>
+					</div>
+				</div>	
+					
+				<div class="layout__item u-1/6 summary-box style-scope rmd-ref-app-summary-card" style="width: 23% !important;">
+					<h4 class="summary-label caps style-scope rmd-ref-app-summary-card" style="font-size:16px;">Variance</h4>
+					<div class="style-scope rmd-ref-app-summary-card">
+						<span class="summary-value style-scope rmd-ref-app-summary-card">{{headerData7.totalVariance}}</span>
+						<span class="summary-uom style-scope rmd-ref-app-summary-card">Units</span>
+					</div>
+				</div>	
+		  </div>
+ </div>		 
+		  <px-card icon="fa-bar-chart" header-text="Customer Consumption Overview">
+		   <highchart id="chart11" config="chartConfig11" class="span12"></highchart>
+		   </px-card>
+		   </div>
+		
+	
+	  <div id="customer-location" ng-hide="customerlocation">
+ 
+       <button class="btn btn--tertiary btn--icon float--right" style="margin-top:10px; margin-right:10px;" type="button" 
+title="Back to Summary" ng-click="summaryCall2()"><i class="fa fa-times-circle"></i></button>
+
+	   <px-card header-text="Customer Consumption Detailed Data table">
+	   
+	  <img class="float--right" style="margin-top:-70px; margin-right:30px;" id="inventoryImageId11" src="../images/excel.png" alt="Excel Download" title="Export to Excel">
+	  <px-data-table id="mytable" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{projectDetails7}}">	  	
+	<px-data-table-column
+          name="customerSite" type="html"
+		  label="Customer Site"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		
+	<px-data-table-column
+          name="customerDesc" type="html"
+		  label="Customer Name"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+    </px-data-table-column>
+	<px-data-table-column
+          name="material" type="html"
+		  label="Material"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+	<px-data-table-column
+          name="materialDescription" type="html"
+		  label="Material Description"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="currentQty" type="html"
+		  label="Installed Quantity"
+          filterable
+         sortable>
+        </px-data-table-column>
+		<px-data-table-column
+          name="lastDate" type="html"
+		  label="Date of Installation"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>		
+      	<px-data-table-column
+          name="state" type="html"
+		  label="State"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="returnedQty" 
+		  label="Returned"
+          filterable
+         sortable>
+        </px-data-table-column>
+		<px-data-table-column
+          name="fsgServedLocation" 
+		  label="FSG Served"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>	
+		<px-data-table-column
+          name="variance" 
+		  label="Variance"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>			
+      </px-data-table>
+	  </px-card>
+	  </div>
+</div>
+<div ng-hide="agingsection">
+<div id="agingdata" ng-hide="agingdata">
+<px-card icon="fa-bar-chart" header-text="In-active Stock Reports">
+<highchart id="chart999" config="chartConfig999" class="span12"></highchart> 
+</px-card>
+</div>
+
+<div id="agingdatadrill" ng-hide="agingdatadrill">
+<div id="summary4" ng-hide = "summary4">
+  
+       <button class="btn btn--tertiary btn--icon float--right" style="margin-top:10px; margin-right:10px;" type="button" 
+title="Back to Summary" ng-click="summaryCall1()"><i class="fa fa-times-circle"></i></button>
+	   <px-card header-text="Inactive Stock Detailed Data - Aging 10 to 20 days">
+	  <a href=""><img class="float--right" style="margin-top:-70px; margin-right:30px;" id="inActivestock10to20" src="../images/excel.png" alt="Excel Download" title="Export to Excel"></a>
+<px-data-table id="mytable1" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{aging0to15data}}">
+        <px-data-table-column
+          name="material" type="html"
+		  label="Material"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		
+		<px-data-table-column
+          name="Storage_location" type="html"
+		  label="Location"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+        <px-data-table-column
+          name="productcost" type="html"
+		  label="product cost($$)"
+          filterable
+          sortable>
+        </px-data-table-column>
+							
+      </px-data-table> 
+	  </px-card>
+	   
+
+</div> 
+<div id="summary1" ng-hide = "summary1">
+   
+       <button class="btn btn--tertiary btn--icon float--right" style="margin-top:10px; margin-right:10px;" type="button" 
+title="Back to Summary" ng-click="summaryCall1()"><i class="fa fa-times-circle"></i></button>
+	   <px-card header-text="Inactive Stock Detailed Data - Aging 20 to 30 days">
+	  <a href=""><img class="float--right" style="margin-top:-70px; margin-right:30px;" id="inActivestock20to30" src="../images/excel.png" alt="Excel Download" title="Export to Excel"></a>
+<px-data-table id="mytable2" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{aging16to30data}}">
+        <px-data-table-column
+          name="material" type="html"
+		  label="Material"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="Storage_location" type="html"
+		  label="Location"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+        <px-data-table-column
+          name="productcost" type="html"
+		  label="product cost($$)"
+          filterable
+          sortable>
+        </px-data-table-column>
+							
+      </px-data-table> 
+	  </px-card>
+	   
+
+</div> 
+<div id="summary2" ng-hide = "summary2">
+  
+       <button class="btn btn--tertiary btn--icon float--right" style="margin-top:10px; margin-right:10px;" type="button" 
+title="Back to Summary" ng-click="summaryCall1()"><i class="fa fa-times-circle"></i></button>
+	   <px-card header-text="Inactive Stock Detailed Data - Aging 30 to 60 days">
+	  <a href=""><img class="float--right" style="margin-top:-70px; margin-right:30px;" id="inActivestock30to60" src="../images/excel.png" alt="Excel Download" title="Export to Excel"></a>
+<px-data-table id="mytable3" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{aging31to60data}}">
+        <px-data-table-column
+          name="material" type="html"
+		  label="Material"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="location" type="html"
+		  label="Location"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+        <px-data-table-column
+          name="productcost" type="html"
+		  label="product cost($$)"
+          filterable
+          sortable>
+        </px-data-table-column>
+							
+      </px-data-table> 
+	  </px-card>
+	   
+      
+	
+</div> 
+<div id="summary3" ng-hide = "summary3">
+ 
+       <button class="btn btn--tertiary btn--icon float--right" style="margin-top:10px; margin-right:10px;" type="button" 
+title="Back to Summary" ng-click="summaryCall1()"><i class="fa fa-times-circle"></i></button>
+	   <px-card header-text="Inactive Stock Detailed Data - 60+ days">
+	  <a href=""><img class="float--right" style="margin-top:-70px; margin-right:30px;" id="inActivestock60plus" src="../images/excel.png" alt="Excel Download" title="Export to Excel"></a>
+<px-data-table id="mytable4" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{aging60plusdata}}">
+        <px-data-table-column
+          name="material" type="html"
+		  label="Material"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="Storage_location" type="html"
+		  label="Location"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+        <px-data-table-column
+          name="productcost" type="html"
+		  label="product cost($$)"
+          filterable
+         sortable>
+        </px-data-table-column>
+							
+      </px-data-table> 
+	  </px-card>
+	   
+
+</div> 
+</div>
+</div>
+</div>
+<div ng-hide="!InvalidUser">
+<h1>You are not Authorized to view this page</h1>
+</div>
+<script>
+window.myTableCustomFunctions = {		 
+          serviceTable: function(a, b) {		  
+            var ia = parseInt(a.value.split(' ').join(''), 10);
+            var ib = parseInt(b.value.split(' ').join(''), 10);
+            return this.descending
+              ? (ia < ib ? 1 : -1)
+              : (ia > ib ? 1 : -1);
+          },
+		  serviceTable1: function(c, d) {		  
+            var iaa = parseInt(c.value.split(' ').join(''), 10);
+            var ibb = parseInt(d.value.split(' ').join(''), 10);
+            return this.descending
+              ? (iaa < ibb ? 1 : -1)
+              : (iaa > ibb ? 1 : -1);
+          },
+		  serviceTable2: function(e, f) {		  
+            console.log("inn");		  
+            var abc = e.value.replace( /[^\d.]/g, '' );
+			var def = parseInt(abc);
+			console.log(abc);	
+			console.log(def);			
+            var ghi = f.value.replace( /[^\d.]/g, '' );
+			console.log(ghi);
+			var number = parseInt(ghi);			
+			console.log(number);
+            return this.descending
+              ? (def < number ? 1 : -1)
+              : (def > number ? 1 : -1);
+          },
+		  serviceTable3: function(g, h) {		  
+            console.log("inner");		  
+            var ide = g.value.replace( /[^\d.]/g, '' );
+			var ammwe = parseInt(ide);
+			console.log(ide);	
+			console.log(ammwe);			
+            var inoo = h.value.replace( /[^\d.]/g, '' );
+			console.log(inoo);
+			var numberr = parseInt(inoo);			
+			console.log(numberr);
+            return this.descending
+              ? (ammwe < numberr ? 1 : -1)
+              : (ammwe > numberr ? 1 : -1);
+          },
+		  serviceTable4: function(i, j) {		  
+            var ihi = parseInt(i.value.split(' ').join(''), 10);
+            var ijk = parseInt(j.value.split(' ').join(''), 10);
+            return this.descending
+              ? (ihi < ijk ? 1 : -1)
+              : (ihi > ijk ? 1 : -1);
+          },
+		  serviceTable5: function(k, l) {		  
+            var ilm = parseInt(k.value.split(' ').join(''), 10);
+            var ino = parseInt(l.value.split(' ').join(''), 10);
+            return this.descending
+              ? (ilm < ino ? 1 : -1)
+              : (ilm > ino ? 1 : -1);
+          },
+		  
+		  serviceTable8: function(m, n) {		  
+            console.log("inneer");		  
+            var makka = m.value.replace( /[^\d.]/g, '' );
+			var maka = parseFloat(makka);
+			console.log(makka);	
+			console.log(maka);			
+            var tin = n.value.replace( /[^\d.]/g, '' );
+			console.log(tin);
+			var tint = parseFloat(tin);			
+			console.log(tint);
+            return this.descending
+              ? (maka < tint ? 1 : -1)
+              : (maka > tint ? 1 : -1);
+          },
+		  serviceTable9: function(o, p) {		  
+           console.log("inneer");		  
+            var makka = o.value.replace( /[^\d.]/g, '' );
+			var maka = parseFloat(makka);
+			console.log(makka);	
+			console.log(maka);			
+            var tin = p.value.replace( /[^\d.]/g, '' );
+			console.log(tin);
+			var tint = parseFloat(tin);			
+			console.log(tint);
+            return this.descending
+              ? (maka < tint ? 1 : -1)
+              : (maka > tint ? 1 : -1);
+          },
+		   serviceTable10: function(q, r) {		  
+           console.log("inneer");		  
+            var makka = q.value.replace( /[^\d.]/g, '' );
+			var maka = parseFloat(makka);
+			console.log(makka);	
+			console.log(maka);			
+            var tin = r.value.replace( /[^\d.]/g, '' );
+			console.log(tin);
+			var tint = parseFloat(tin);			
+			console.log(tint);
+            return this.descending
+              ? (maka < tint ? 1 : -1)
+              : (maka > tint ? 1 : -1);
+          },
+		  serviceTable11: function(s, t) {		  
+            console.log("inneer");		  
+            var makka = s.value.replace( /[^\d.]/g, '' );
+			var maka = parseFloat(makka);
+			console.log(makka);	
+			console.log(maka);			
+            var tin = t.value.replace( /[^\d.]/g, '' );
+			console.log(tin);
+			var tint = parseFloat(tin);			
+			console.log(tint);
+            return this.descending
+              ? (maka < tint ? 1 : -1)
+              : (maka > tint ? 1 : -1);
+          },
+		  
+		  serviceTable12: function(u, v) {		  
+            var red = parseInt(u.value.split(' ').join(''), 10);
+            var read = parseInt(v.value.split(' ').join(''), 10);
+            return this.descending
+              ? (red < read ? 1 : -1)
+              : (red > read ? 1 : -1);
+          },
+		  demandTable: function(w, x) {		  
+            var ind = parseInt(w.value.split(' ').join(''), 10);
+            var indd = parseInt(x.value.split(' ').join(''), 10);
+            return this.descending
+              ? (ind < indd ? 1 : -1)
+              : (ind > indd ? 1 : -1);
+          },
+		  shortageTable: function(y, z) {		  
+            var lock = parseInt(y.value.split(' ').join(''), 10);
+            var lockk = parseInt(z.value.split(' ').join(''), 10);
+            return this.descending
+              ? (lock < lockk ? 1 : -1)
+              : (lock > lockk ? 1 : -1);
+          },
+		  firstTable: function(z, w) {		  
+           console.log("inneer");		  
+            var makka = z.value;
+			var maka = parseFloat(makka);
+			console.log(makka);	
+			console.log(maka);			
+            var tin = w.value;
+			console.log(tin);
+			var tint = parseFloat(tin);			
+			console.log(tint);
+            return this.descending
+              ? (maka < tint ? 1 : -1)
+              : (maka > tint ? 1 : -1);
+          },
+		  secondTable: function(x, i) {		  
+             console.log("inneer");		  
+            var makka = x.value;
+			var maka = parseFloat(makka);
+			console.log(makka);	
+			console.log(maka);			
+            var tin = i.value;
+			console.log(tin);
+			var tint = parseFloat(tin);			
+			console.log(tint);
+            return this.descending
+              ? (maka < tint ? 1 : -1)
+              : (maka > tint ? 1 : -1);
+          }
+		  
+        };
+ function inputLostFocus(evt){
+            Polymer.dom(document).querySelector("#three").modalButtonClicked();
+          }
+
+          function gotoLink(evt){		  
+		  $("#myModal1").css("visibility","visible");
+		  $("#myModal1").show();
+           
+          }
+		  function editcancelForm(evt){		  
+		  $("#myModal1").css("visibility","hidden");	  
+          }
+		  function editcancelForm1(evt){		  
+		  $("#myModal5").css("visibility","hidden");	  
+          }
+		  function editcancelForm2(evt){		  
+		  $("#myModal7").css("visibility","hidden");	  
+          }	 
+		  
+		  function gotoLink1(evt){		  
+		   var myEl = angular.element( document.querySelectorAll( '.modal' )[1] );
+			myEl.attr('id',"myModal5");
+			$("#myModal5").css("visibility","visible");
+           $("#myModal5").show();
+          }
+		   function gotoLink2(evt){		 
+		   var myEl = angular.element( document.querySelectorAll( '.modal' )[2] );
+			myEl.attr('id',"myModal7");
+		  $("#myModal7").css("visibility","visible");
+		  $("#myModal7").show();
+            
+          }
+ function drilldown(evt){			
+			$('#testing1').focus();            	 	
+          }
+		  function searchForm(evt){	
+
+
+if ($('button').hasClass('dollars')){
+		var myEl = angular.element( document.querySelectorAll( '.fa-toggle-off' )[0] );
+		myEl.attr('class',"fa fa-toggle-on");
+       //$scope.search = false;
+	   $('.dollar').show();
+	   $('.units').hide();
+	   //$(".dollars").text('Save');
+	   var myElj = angular.element( document.querySelectorAll( '.dollars' )[0] );
+		myElj.html('<i class="fa fa-toggle-on u-mr--"></i>Millions');
+	   var myElc = angular.element( document.querySelectorAll( '.dollars' )[0] );
+		myElc.attr('class',"btn btn--primary float--right search");
+		
+    } 
+	else if ($('button').hasClass('search')){
+		var myEl = angular.element( document.querySelectorAll( '.fa-toggle-on' )[0] );
+		myEl.attr('class',"fa fa-toggle-off");
+       //$scope.search = true;
+	   $('.dollar').hide();
+	   $('.units').show();
+	   var myElj = angular.element( document.querySelectorAll( '.search' )[0] );
+		myElj.html('<i class="fa fa-toggle-off u-mr--"></i>Units');
+	   var myEld = angular.element( document.querySelectorAll( '.search' )[0] );
+		myEld.attr('class',"btn btn--primary float--right dollars");
+    } 	
+ 
+          }
+</script>

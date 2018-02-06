@@ -1,0 +1,146 @@
+<style>
+.btn.btn--tertiary.btn--icon
+ {
+    color: #ff9821 !important; }
+</style>
+<div ng-hide="!validUser">
+<!--<template is="dom-bind">
+     {{consumptionpop}}
+	  <iron-ajax url="../bower_components/px-data-table/loggerData.json" last-response="{{loggerDetails}}" auto></iron-ajax>-->
+<px-modal id="four" modal-heading="">   
+<h3 class="caps u-mv0 style-scope px-card-header" id="headertext" style="margin: 0px 0px 0px 18px;">{{idd}}</h3>		
+	   <px-card header-text="Logger Details" style="margin: -18px 0px 0px 0px;"> 	   
+	   <button class="btn btn--tertiary btn--icon float--right" style="margin-top:-53px;" 
+title="Back to Summary" onclick="editcancelForm()"><i class="fa fa-times-circle"></i></button>
+	 <!-- <img class="float--right" style="margin-top:-70px; margin-right:54px;" id="inventoryImageId18" src="../images/excel.png" alt="Excel Download" title="Export to Excel">-->
+<px-data-table id="mytable" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{loggerDetails}}">
+		<px-data-table-column
+          name="upload_or_run_id" type="html"
+		  label="UPLOAD ID"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="log" type="html"
+		  label="Log"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+      </px-data-table> 
+	  </px-card>	 
+</px-modal>
+ <!--</template> -->
+
+
+<div id="customerdemand" ng-hide="custdemand">
+	  <px-card header-text="Upload Excel Details">
+           <i class="fa fa-refresh fa-2x float--right" aria-hidden="true" style="margin-top: -58px; margin-right: 75px; color: #ff9821" ng-click="tableData()" title="Refresh"></i>
+	  <img class="float--right" style="margin-top:-70px;" src="../images/excel.png" id="inventoryImageId6" alt="Excel Download" title="Export to Excel">
+<px-data-table id="custdemand" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{logDetailsObj}}">
+		<px-data-table-column
+          name="upload_id" type="html"
+		  label="UPLOAD ID"
+          filterable
+          sortable
+          >
+        </px-data-table-column> 
+		<!-- <px-data-table-column
+          name="xls_id" type="html"
+		  label="XLS_ID"
+          filterable
+          sortable
+          >
+        </px-data-table-column -->
+        <px-data-table-column
+          name="file_name" type="html"
+		  label="FILE NAME"
+          filterable
+          sortable
+          >
+        </px-data-table-column>
+		<!--<px-data-table-column
+          name="csv_blob_store_location" type="html"
+		  label="BLOB STORE LOCATION"
+          filterable
+          sortable
+          >
+        </px-data-table-column>		-->
+		<px-data-table-column
+          name="total_rows"
+		  label="TOTAL ROWS"		  
+          filterable
+		  sortable
+          >
+        </px-data-table-column>
+		
+        <px-data-table-column
+          name="row_passed"
+		  label="ROW PASSED"
+          filterable
+          sortable
+          >
+        </px-data-table-column>
+		 <px-data-table-column
+          name="row_failed"
+		  label="ROW FAILED"		  
+          filterable
+		  sortable
+         >
+        </px-data-table-column>		
+		<px-data-table-column
+          name="user_comment" type="html"
+		  label="USER COMMENTS"
+          filterable
+          sortable
+          >
+        </px-data-table-column>
+		<px-data-table-column
+          name="created_by" type="html"
+		  label="UPLOADED BY"
+          filterable
+          sortable
+          >
+        </px-data-table-column>
+		<!--<px-data-table-column
+          name="db_processed"  type="html"
+		  label="DB PROCESSED"		  
+          filterable
+          sortable
+          >
+        </px-data-table-column> -->
+		<px-data-table-column
+          name="create_dtm" type="html" 
+          label="PROCESSED DATE"		  
+          filterable
+          sortable
+          >
+        </px-data-table-column>
+		<px-data-table-column
+          name="status" type="html" 
+          label="STATUS"		  
+          filterable
+          sortable
+          >
+        </px-data-table-column>
+	  </px-card>
+	   
+</div>
+</div>
+
+   
+    
+<div ng-hide="!InvalidUser">
+<h1>You are not Authorized to view this page</h1>
+</div>
+<script>
+function drilldownLog(evt){
+//alert("clicked")		  ;
+		  $("#myModal1").css("visibility","visible");
+		  $("#myModal1").show();           
+          }
+		  function editcancelForm(evt){		  
+		  $("#myModal1").css("visibility","hidden");	  
+          }
+</script>

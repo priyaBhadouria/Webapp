@@ -1,0 +1,138 @@
+<px-card header-text="Inactive Stock report">
+<highchart id="chart5" config="chartConfig85" class="span12"></highchart>
+</px-card> 
+
+
+ <div id="summary" ng-hide = "summary">
+  
+       
+	   <px-card header-text="Inactive Stock Detailed Data">
+	  
+<px-data-table id="mytable" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{aging0to15data}}">
+        <px-data-table-column
+          name="material" type="html"
+		  label="SKU"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="location" type="html"
+		  label="Location"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+        <px-data-table-column
+          name="quantity" type="html"
+		  label="Aging 10 to 20 Days"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+							
+      </px-data-table> 
+	  </px-card>
+	   
+
+</div> 
+<div id="summary1" ng-hide = "summary1" style="margin-top: -20px;">
+   
+       
+	   <px-card header-text="Inactive Stock Detailed Data">
+	  
+<px-data-table id="mytable" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{aging16to30data}}">
+        <px-data-table-column
+          name="material" type="html"
+		  label="SKU"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="location" type="html"
+		  label="Location"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+        <px-data-table-column
+          name="quantity" type="html"
+		  label="Aging 20 to 30 Days"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+							
+      </px-data-table> 
+	  </px-card>
+	   
+
+</div> 
+<div id="summary2" ng-hide = "summary2" style="margin-top: -20px;">
+  
+       
+	   <px-card header-text="Inactive Stock Detailed Data">
+	  
+<px-data-table id="mytable" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{aging31to60data}}">
+        <px-data-table-column
+          name="material" type="html"
+		  label="SKU"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="location" type="html"
+		  label="Location"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+        <px-data-table-column
+          name="quantity" type="html"
+		  label="Aging 30 to 60 Days"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+							
+      </px-data-table> 
+	  </px-card>
+	   
+      
+	
+</div> 
+<div id="summary3" ng-hide = "summary3" style="margin-top: -20px;">
+ 
+       
+	   <px-card header-text="Inactive Stock Detailed Data">
+	  
+<px-data-table id="mytable" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{aging60plusdata}}">
+        <px-data-table-column
+          name="material" type="html"
+		  label="SKU"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="location" type="html"
+		  label="Location"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+        <px-data-table-column
+          name="quantity" type="html"
+		  label="Aging 60+ Days"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+							
+      </px-data-table> 
+	  </px-card>
+	   
+
+</div> 

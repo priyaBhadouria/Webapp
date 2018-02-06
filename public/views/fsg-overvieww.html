@@ -1,0 +1,577 @@
+<style>
+.btn.btn--tertiary.btn--icon
+ {
+    color: #ff9821 !important; }
+</style>
+<input type="text" ng-model="overview" ng-focus="hideShowFun()" id="testing1" style="opacity:0;height:0px;">
+<div id="summary" ng-hide = "summary" style="margin-top: -20px;">
+	 <div class="layout layout--right style-scope rmd-ref-app-summary-card">
+			
+				<div class="layout__item u-1/6 summary-box style-scope rmd-ref-app-summary-card" style="width: 23% !important;">
+					<h4 class="summary-label caps style-scope rmd-ref-app-summary-card" style="font-size:13px;">FSG Inventory</h4>
+					<div class="style-scope rmd-ref-app-summary-card units">
+						<span class="summary-value style-scope rmd-ref-app-summary-card">5900</span>
+						<span class="summary-uom style-scope rmd-ref-app-summary-card">Units</span>
+					</div>
+					<div class="style-scope rmd-ref-app-summary-card dollar">
+						<span class="summary-value style-scope rmd-ref-app-summary-card">$5900</span>
+						<span class="summary-uom style-scope rmd-ref-app-summary-card">Millions</span>
+					</div>
+				</div>
+							
+				<div class="layout__item u-1/6 summary-box style-scope rmd-ref-app-summary-card" style="width: 23% !important;">
+					<h4 class="summary-label caps style-scope rmd-ref-app-summary-card" style="font-size:13px;">In Transit to FSG</h4>
+					<div class="style-scope rmd-ref-app-summary-card units">
+						<span class="summary-value style-scope rmd-ref-app-summary-card">2000</span>
+						<span class="summary-uom style-scope rmd-ref-app-summary-card">Units</span>
+					</div>
+					<div class="style-scope rmd-ref-app-summary-card dollar">
+						<span class="summary-value style-scope rmd-ref-app-summary-card">$2000</span>
+						<span class="summary-uom style-scope rmd-ref-app-summary-card">Millions</span>
+					</div>
+				</div>
+				
+				<div class="layout__item u-1/6 summary-box style-scope rmd-ref-app-summary-card" style="width: 23% !important;">
+					<h4 class="summary-label caps style-scope rmd-ref-app-summary-card" style="font-size:13px;">FSG Demand</h4>
+					<div class="style-scope rmd-ref-app-summary-card units">
+						<span class="summary-value style-scope rmd-ref-app-summary-card">9000</span>
+						<span class="summary-uom style-scope rmd-ref-app-summary-card">Units</span>
+					</div>
+					<div class="style-scope rmd-ref-app-summary-card dollar">
+						<span class="summary-value style-scope rmd-ref-app-summary-card">$9000</span>
+						<span class="summary-uom style-scope rmd-ref-app-summary-card">Millions</span>
+					</div>
+				</div>
+							
+				<div class="layout__item u-1/6 summary-box style-scope rmd-ref-app-summary-card" style="width: 23% !important;">
+					<h4 class="summary-label caps style-scope rmd-ref-app-summary-card" style="font-size:13px;">FSG Shortage</h4>
+					<div class="style-scope rmd-ref-app-summary-card units">
+						<span class="summary-value style-scope rmd-ref-app-summary-card">1100</span>
+						<span class="summary-uom style-scope rmd-ref-app-summary-card">Units</span>
+					</div>
+					<div class="style-scope rmd-ref-app-summary-card dollar">
+						<span class="summary-value style-scope rmd-ref-app-summary-card">$1100</span>
+						<span class="summary-uom style-scope rmd-ref-app-summary-card">Millions</span>
+					</div>
+				</div>
+				<div class="layout__item u-1/6 summary-box style-scope rmd-ref-app-summary-card" style="width: 3% !important;">
+					<button class="btn  btn--tertiary btn--icon float--right dollars" style="margin-top:10px; padding:0px;"  type="button" title="Click to toggle" onclick="searchForm()">
+			<i class="fa fa-toggle-off"></i>
+			</button>
+				</div>
+						
+			
+		  </div>
+		  <px-twoup id="widgetsx2" widget-header="FSG Overview/Inactive Stock Reports" widget-icon="fa-bar-chart">
+	 
+      <div class=widget-1>
+       <highchart id="chart99" config="chartConfig99" class="span12"></highchart> 
+      </div>
+      <div class=widget-2>	
+      <highchart id="chart5" config="chartConfig999" class="span12"></highchart>
+      </div>	  
+    </px-twoup> 
+	
+	<px-twoup id="widgetsx2" widget-header="FSG Overview/Inactive Stock Detailed Table" widget-icon="fa-briefcase">
+	 
+      <div class=widget-1>
+         
+       
+	 <px-card header-text="FSG Inventory Overview">
+	  <a href="export"><img class="float--right" style="margin-top:-70px;" src="../images/excel.png" alt="Excel Download" title="Export to Excel"></a>
+	<px-data-table id="mytable" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{projectDetails}}">
+	<px-data-table-column
+          name="fsgLocation" type="html"
+		  label="FSG Location"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+	<px-data-table-column
+          name="materialId" type="html"
+		  label="Material"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<!-- <px-data-table-column
+          name="materialdesc" type="html"
+		  label="Material Description"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column> -->
+        
+		 <px-data-table-column
+          name="inventory" type="html"
+		  label="Inventory Quantity"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+        <px-data-table-column
+          name="demand" type="html"
+		  label="Demand"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>				
+		<px-data-table-column
+          name="inTransit" type="html"
+		  label="In Transit"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="shortage" type="html"
+		  label="Shortage Quantity"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+      </px-data-table> 
+	  </px-card>
+	   
+      
+	
+	  
+      </div>
+      <div class=widget-2>	
+        <div id="summary4" ng-hide = "summary4">
+  
+       
+	   <px-card header-text="Inactive Stock Detailed Data">
+	  <a href="export"><img class="float--right" style="margin-top:-70px;" src="../images/excel.png" alt="Excel Download" title="Export to Excel"></a>
+<px-data-table id="mytable1" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{aging0to15data}}">
+        <px-data-table-column
+          name="material" type="html"
+		  label="SKU"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="location" type="html"
+		  label="Location"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+        <px-data-table-column
+          name="quantity" type="html"
+		  label="Aging 10 to 20 Days"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+							
+      </px-data-table> 
+	  </px-card>
+	   
+
+</div> 
+<div id="summary1" ng-hide = "summary1" style="margin-top: -20px;">
+   
+       
+	   <px-card header-text="Inactive Stock Detailed Data">
+	  <a href="export"><img class="float--right" style="margin-top:-70px;" src="../images/excel.png" alt="Excel Download" title="Export to Excel"></a>
+<px-data-table id="mytable2" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{aging16to30data}}">
+        <px-data-table-column
+          name="material" type="html"
+		  label="SKU"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="location" type="html"
+		  label="Location"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+        <px-data-table-column
+          name="quantity" type="html"
+		  label="Aging 20 to 30 Days"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+							
+      </px-data-table> 
+	  </px-card>
+	   
+
+</div> 
+<div id="summary2" ng-hide = "summary2" style="margin-top: -20px;">
+  
+       
+	   <px-card header-text="Inactive Stock Detailed Data">
+	  <a href="export"><img class="float--right" style="margin-top:-70px;" src="../images/excel.png" alt="Excel Download" title="Export to Excel"></a>
+<px-data-table id="mytable3" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{aging31to60data}}">
+        <px-data-table-column
+          name="material" type="html"
+		  label="SKU"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="location" type="html"
+		  label="Location"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+        <px-data-table-column
+          name="quantity" type="html"
+		  label="Aging 30 to 60 Days"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+							
+      </px-data-table> 
+	  </px-card>
+	   
+      
+	
+</div> 
+<div id="summary3" ng-hide = "summary3" style="margin-top: -20px;">
+ 
+       
+	   <px-card header-text="Inactive Stock Detailed Data">
+	  <a href="export"><img class="float--right" style="margin-top:-70px;" src="../images/excel.png" alt="Excel Download" title="Export to Excel"></a>
+<px-data-table id="mytable4" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{aging60plusdata}}">
+        <px-data-table-column
+          name="material" type="html"
+		  label="SKU"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="location" type="html"
+		  label="Location"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+        <px-data-table-column
+          name="quantity" type="html"
+		  label="Aging 60+ Days"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+							
+      </px-data-table> 
+	  </px-card>
+	   
+
+</div> 
+      </div>	  
+    </px-twoup>
+
+	  </div>
+<div id="dashboard" ng-hide = "overview" style="margin-top:-17px;">
+
+<div class="layout layout--right style-scope rmd-ref-app-summary-card">
+			<!-- Below function requires FSG Name which is selected by user  -->
+				<div class="layout__item u-1/6 summary-box style-scope rmd-ref-app-summary-card" style="width: 23% !important;">
+					<h4 class="summary-label caps style-scope rmd-ref-app-summary-card" style="font-size:13px;">{{projectDetails5}} Inventory</h4>
+					<div class="style-scope rmd-ref-app-summary-card">
+						<span class="summary-value style-scope rmd-ref-app-summary-card">{{fsgInventory}}</span>
+						<span class="summary-uom style-scope rmd-ref-app-summary-card">Units</span>
+					</div>
+				</div>
+			
+			<!-- Below function requires FSG Name which is selected by user  -->
+				<div class="layout__item u-1/6 summary-box style-scope rmd-ref-app-summary-card" style="width: 23% !important;">
+					<h4 class="summary-label caps style-scope rmd-ref-app-summary-card" style="font-size:13px;">{{projectDetails5}} Demand</h4>
+					<div class="style-scope rmd-ref-app-summary-card">
+						<span class="summary-value style-scope rmd-ref-app-summary-card">{{fsgDemand}}</span>
+						<span class="summary-uom style-scope rmd-ref-app-summary-card">Units</span>
+					</div>
+				</div>
+			<!-- Below function requires FSG Name which is selected by user  -->
+				<div class="layout__item u-1/6 summary-box style-scope rmd-ref-app-summary-card" style="width: 23% !important;">
+					<h4 class="summary-label caps style-scope rmd-ref-app-summary-card" style="font-size:13px;">In Transit to {{projectDetails5}}</h4>
+					<div class="style-scope rmd-ref-app-summary-card">
+						<span class="summary-value style-scope rmd-ref-app-summary-card">{{inTransitToFSG}}</span>
+						<span class="summary-uom style-scope rmd-ref-app-summary-card">Units</span>
+					</div>
+				</div>
+				<!-- Below function requires FSG Name which is selected by user  -->
+				<div class="layout__item u-1/6 summary-box style-scope rmd-ref-app-summary-card" style="width: 23% !important;">
+					<h4 class="summary-label caps style-scope rmd-ref-app-summary-card" style="font-size:13px;">{{projectDetails5}} Shortage</h4>
+					<div class="style-scope rmd-ref-app-summary-card">
+						<span class="summary-value style-scope rmd-ref-app-summary-card">{{fsgShortage}}</span>
+						<span class="summary-uom style-scope rmd-ref-app-summary-card">Units</span>
+					</div>
+				</div>
+						
+			
+		  </div>
+	  <button class="btn btn--tertiary btn--icon float--right" style="margin-top:10px; margin-right:10px;" type="button" 
+title="Back to Summary" ng-click="summaryCall()"><i class="fa fa-times-circle"></i></button>
+
+<px-card header-text="{{projectDetails5}} Inventory/Demand/In-Transit/Shortage Detailed Table">
+ <a href="export"><img class="float--right" style="margin-top:-70px; margin-right:30px;" src="../images/excel.png" alt="Excel Download" title="Export to Excel"></a>	
+<px-data-table id="mytable" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{fsgdata}}">
+        <px-data-table-column
+          name="material" type="html"
+		  label="Material"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+        <px-data-table-column
+          name="materialdesc" type="html"
+		  label="Material Description"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="inventory" type="html"
+		  label="Inventory"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="demand" type="html"
+		  label="Demand"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="inventory" type="html"
+		  label="In-Transit"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="shortage" type="html"
+		  label="Shortage"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="weekly" type="html"
+		  label="Weekly Bucket"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+				
+      </px-data-table> 
+	  </px-card>
+<!-- <template is="dom-bind">
+	  <iron-ajax url="../bower_components/px-data-table/fsg-overview-data.json" last-response="{{fsgdata}}" auto></iron-ajax>     
+	  <iron-ajax url="../bower_components/px-data-table/sitee-overview-data.json" last-response="{{siteedata}}" auto></iron-ajax>
+	  <iron-ajax url="../bower_components/px-data-table/shortage-overview-data.json" last-response="{{shortagedata}}" auto></iron-ajax>
+	  <iron-ajax url="../bower_components/px-data-table/transit-overview-data.json" last-response="{{transitdata}}" auto></iron-ajax>-->
+	 <!-- <px-fourup id="widgetsx4" widget-header="FSG Detailed Data Table" widget-icon="fa-briefcase"> 	 
+	   <div class=widget-1>
+	<px-card header-text="{{projectDetails5}} Inventory">
+ <a href="export"><img class="float--right" style="margin-top:-70px;" src="../images/excel.png" alt="Excel Download" title="Export to Excel"></a>	
+<px-data-table id="mytable" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{fsgdata}}">
+        <px-data-table-column
+          name="material" type="html"
+		  label="Material"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+        <px-data-table-column
+          name="materialdesc" type="html"
+		  label="Material Description"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="inventory" type="html"
+		  label="Inventory"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="demand" type="html"
+		  label="Demand"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="inventory" type="html"
+		  label="In-Transit"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="shortage" type="html"
+		  label="Shortage"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="weekly" type="html"
+		  label="Weekly Bucket"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+				
+      </px-data-table> 
+	  </px-card>
+	  </div>
+	  <div class=widget-2>
+	<px-card header-text="{{projectDetails5}} Demand">	
+<a href="export"><img class="float--right" style="margin-top:-70px;" src="../images/excel.png" alt="Excel Download" title="Export to Excel"></a>	
+<px-data-table id="mytable" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{siteedata}}">
+      
+        <px-data-table-column
+          name="material" type="html"
+		  label="Material"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+        <px-data-table-column
+          name="materialdesc" type="html"
+		  label="Material Description"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="demand" type="html"
+		  label="Demand"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="weekly" type="html"
+		  label="Weekly Bucket"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+				
+      </px-data-table> 
+				
+      </px-data-table> 
+	  </px-card>
+	  </div>
+	   <div class=widget-3>
+	<px-card header-text="{{projectDetails5}} In-Transit">	
+<a href="export"><img class="float--right" style="margin-top:-70px;" src="../images/excel.png" alt="Excel Download" title="Export to Excel"></a>	
+<px-data-table id="mytable" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{transitdata}}">
+        <px-data-table-column
+          name="material" type="html"
+		  label="Material"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+        <px-data-table-column
+          name="materialdesc" type="html"
+		  label="Material Description"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="inventory" type="html"
+		  label="In-Transit"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+				
+      </px-data-table>  
+	  </px-card>
+	  </div>
+	  <div class=widget-4>
+	<px-card header-text="{{projectDetails5}} Shortage">	
+<a href="export"><img class="float--right" style="margin-top:-70px;" src="../images/excel.png" alt="Excel Download" title="Export to Excel"></a>	
+<px-data-table id="mytable" selected-rows="{{mySelectedRows}}" filterable striped table-data="{{shortagedata}}">
+        <px-data-table-column
+          name="material" type="html"
+		  label="Material"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+        <px-data-table-column
+          name="materialdesc" type="html"
+		  label="Material Description"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="shortage" type="html"
+		  label="Shortage"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+		<px-data-table-column
+          name="weekly" type="html"
+		  label="Week Short"
+          filterable
+          sortable
+          filter-function-name="myTableCustomFunctions.filterWholeWord">
+        </px-data-table-column>
+				
+      </px-data-table> 
+	  </px-card>
+	  </div>
+	  </px-fourup> -->
+	
+	
+</div>
+
+
+
+
+
+<script>
+ function drilldown(evt){			
+			$('#testing1').focus();            	 	
+          }
+		  function searchForm(evt){		  			
+	if ($('button').hasClass('dollars')){
+		var myEl = angular.element( document.querySelectorAll( '.fa-toggle-off' )[0] );
+		myEl.attr('class',"fa fa-toggle-on");
+       //$scope.search = false;
+	   $('.dollar').show();
+	   $('.units').hide();
+	   var myElc = angular.element( document.querySelectorAll( '.dollars' )[0] );
+		myElc.attr('class',"btn btn--icon float--right search");
+    } 
+	else if ($('button').hasClass('search')){
+		var myEl = angular.element( document.querySelectorAll( '.fa-toggle-on' )[0] );
+		myEl.attr('class',"fa fa-toggle-off");
+       //$scope.search = true;
+	   $('.dollar').hide();
+	   $('.units').show();
+	   var myEld = angular.element( document.querySelectorAll( '.search' )[0] );
+		myEld.attr('class',"btn btn--icon float--right dollars");
+    } 
+	
+ 
+          }
+</script>

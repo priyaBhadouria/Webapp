@@ -1,0 +1,75 @@
+  <px-card>
+	<span style="font-family:GE Inspira Regular;font-size:35px;color:#000000">Recent Twins</span>
+	 <paper-button raised id="ExpColViv" ><i class="fa fa-map-marker" aria-hidden="true"></i> Locate the Twin</paper-button>
+	 
+	<div style="background-color: #f9f9f9;">
+	<px-spinner ng-show="isLoading"></px-spinner>
+	<div class="module-body" ng-show="!isLoading">
+		<br><br>
+		<div ng-hide="serviceFailed" class="layout">
+			<div ng-repeat="x in [1,2,3,4,5,6,7,8,9,10]" class="layout__item u-1/3">
+				<div class="box">
+	           		<div class="float--left">
+	           			<span class="so col-sm-2 headerPercent"><i class="so {{weatherClass}}"></i></span>
+	           			<span class="so col-sm-2 headerPercent temp-span">
+	           				<h2><b><span data-ng-show="!isCentigrade">{{weatherData.temperatureFahrenheit}}</span>
+	                           	<span data-ng-show="isCentigrade">{{weatherData.temperatureCentigrade}}</span>
+	                           	<sup>
+	                           		<a class="not-clickable"><span ng-show="weatherData.temperatureFahrenheit" class="tempDegree">{{tempUnit1}}</span>
+	                           		<a class="clickable" ng-click="changeTemp()"><span class="tempDegree" ng-show="weatherData.temperatureCentigrade">{{tempUnit2}}</span></a>
+	                           	</sup></b>
+	                       	</h2>
+			        	</span>
+			        </div>
+			        <div class="float--right">
+			        	<span class=col-sm-2 windSpeed rowWindOrTemp"><i class="so {{windClass}}" ></i></span>
+			        	<span class="so col-sm-2 headerPercent">
+			        		<h2><b>{{weatherData.windSpeed}}<span ng-show="weatherData.windSpeed"><sup>&nbsp;m/s</sup></span></b></h2>
+			        	</span>
+			        </div>
+			        
+					<div id="div1" class="weather-upper-div" onscroll="scrollDiv('div1', 'div2', 1)">
+						<span class="weatherSpan" ng-repeat="t in hours track by $index">{{t}}</span>
+					</div>
+					<div id="div2" class="weather-lower-div" onscroll="scrollDiv('div1', 'div2', 2)">
+						<span class="temperature-icons-span" ng-repeat="t in weatherData.temperatureForecast track by $index">
+							<i class="so" ng-class="iconsArray[$index]"></i><br>
+							<span class="weatherSpan" ng-show="!isCentigrade">{{t.fahrenheit}}</span>
+							<span class="weatherSpan" ng-show="isCentigrade">{{t.centigrade}}</span>
+						</span><br>
+						
+						<span ng-repeat="t in weatherData.windSpeedForecast track by $index" style="display:inline-block;">
+							<!-- <a tooltip-placement="right"  tooltip="{{weatherData.windDirectionForecast[$index].windDirection}}"> -->
+							<i class="so temp" ng-class="getWDClass($index)"></i>
+							<!-- </a> --><br>
+							<span class="weatherSpan" id="{{$index}}">{{t.windSpeed}}</span>
+						</span>
+					</div>
+				</div>
+			</div>
+			
+			
+			
+			
+			
+		</div>
+	</div>
+	</div>
+</px-card>
+<script>
+function scrollDiv(divA, divB, divNo) {
+    var div1 = $('#' + divA);
+    var div2 = $('#' + divB);
+    if (!div1 || !div2){return;}
+    var control = null;
+    if (divNo === 1){control = div1;}
+    else if (divNo === 2){control = div2;}
+    if (control === null){return;}
+    else {
+        div1.scrollLeft(control.scrollLeft());
+        div2.scrollLeft(control.scrollLeft());
+        div1.scrollTop(control.scrollTop());
+        div2.scrollTop(control.scrollTop());
+    }
+};
+</script>
